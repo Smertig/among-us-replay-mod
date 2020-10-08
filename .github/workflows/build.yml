@@ -1,0 +1,40 @@
+name: Build On Push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Build
+    strategy:
+      matrix:
+        build_type: [ Debug, Release, RelWithDebInfo ]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: |
+          cmake .. -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -A Win32
+
+      - name: Build mod
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: cmake --build . --config ${{matrix.build_type}} --target among-us-replay-mod
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{matrix.build_type}}
+          path: |
+            ${{github.workspace}}/build/${{matrix.build_type}}/among-us-replay-mod.dll

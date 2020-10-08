@@ -1,0 +1,55 @@
+name: Tagged Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  pre-release:
+    runs-on: windows-latest
+    name: Publish Release ${{github.ref}}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: |
+          cmake .. -DCMAKE_BUILD_TYPE=Release -A Win32
+
+      - name: Build mod
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target among-us-replay-mod
+
+      - name: Build injector
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: |
+          cmake --build . --config Release --target injector
+
+      - name: Collect artifacts
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        run: |
+          cmake -E make_directory among-us-replay-mod
+          cmake -E copy Release/among-us-replay-mod.dll among-us-replay-mod/among-us-replay-mod.dll
+          cmake -E copy Release/injector.exe among-us-replay-mod/injector.exe
+          cmake -E tar cfv among-us-replay-mod.zip among-us-replay-mod
+
+      - name: Publish
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
+          prerelease: false
+          files: |
+            build/among-us-replay-mod.zip

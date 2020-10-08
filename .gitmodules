@@ -1,0 +1,9 @@
+[submodule "external/magic_enum"]
+	path = external/magic_enum
+	url = https://github.com/Neargye/magic_enum
+[submodule "external/rcmp"]
+	path = external/rcmp
+	url = https://github.com/Smertig/rcmp
+[submodule "external/fmt"]
+	path = external/fmt
+	url = https://github.com/fmtlib/fmt
