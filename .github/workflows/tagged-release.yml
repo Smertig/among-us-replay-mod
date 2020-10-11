@@ -43,7 +43,7 @@ jobs:
           cmake -E make_directory among-us-replay-mod
           cmake -E copy Release/among-us-replay-mod.dll among-us-replay-mod/among-us-replay-mod.dll
           cmake -E copy Release/injector.exe among-us-replay-mod/injector.exe
-          cmake -E tar cfv among-us-replay-mod.zip among-us-replay-mod
+          cmake -E tar cfv among-us-replay-mod.zip --format=zip among-us-replay-mod
 
       - name: Publish
         uses: marvinpinto/action-automatic-releases@latest
