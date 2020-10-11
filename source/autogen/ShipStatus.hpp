@@ -51,8 +51,16 @@ struct ShipStatus : InnerNet::InnerNetObject {
     float EmergencyCooldown;
     MapType Type;
 
+    struct StaticFields {
+        ShipStatus* Instance;
+    };
+
     static Class<ShipStatus>* get_class() {
         return Class<ShipStatus>::find("ShipStatus");
+    }
+
+    static ShipStatus* instance() {
+        return get_class()->statics()->Instance;
     }
 };
 CHECK_TYPE(ShipStatus, 0xD0);

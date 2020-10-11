@@ -120,14 +120,27 @@ public:
         std::filesystem::create_directories(REPLAY_DIR);
         auto filename = REPLAY_DIR / fmt::format("replay_{}.aurp", utils::get_date_string(std::chrono::system_clock::now()));
         m_stream = std::fstream(filename, std::fstream::out | std::fstream::binary);
+
+        fmt::print("Start recording..\n");
     }
 
     void stop() {
         m_stream = std::fstream{};
+
+        fmt::print("Stop recording..\n");
     }
 
     bool is_started() {
         return !!m_stream;
+    }
+
+    void try_start_round() {
+        fmt::print("try start round..\n");
+
+        if (!is_started()) {
+            start();
+            on_round_start(ShipStatus::instance(), GameData::instance());
+        }
     }
 
     void on_round_start(const ShipStatus* ship, const GameData* game) {
@@ -157,6 +170,12 @@ public:
     }
 
     void on_frame(const GameData* game) {
+        for (const auto& player : *game->AllPlayers) {
+            if (!player->_object) {
+                return;
+            }
+        }
+
         std::map<std::uint8_t, player_state> current_player_states;
         for (const auto& player : *game->AllPlayers) {
             current_player_states.emplace(player->PlayerId, player_state(*player));
@@ -212,7 +231,7 @@ private:
             if (!game) return;
 
             const auto game_state = AmongUsClient::Instance()->GameState;
-            if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended) {
+            if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended && this->is_started()) {
                 this->stop();
             }
 
@@ -224,8 +243,19 @@ private:
         hook_method<void(*)(ShipStatus*)>("ShipStatus", "Begin", [this](auto original, ShipStatus* self) {
             original(self);
 
-            this->start();
-            this->on_round_start(self, GameData::instance());
+            this->try_start_round();
+        });
+
+        hook_method<void(*)(PlayerControl*, void*)>("PlayerControl", "SetTasks", [this](auto original, auto... args) {
+            original(args...);
+
+            for (const auto& player : *GameData::instance()->AllPlayers) {
+                if (!player->Tasks || player->Tasks->size() == 0) {
+                    return;
+                }
+            }
+
+            this->try_start_round();
         });
     }
 
