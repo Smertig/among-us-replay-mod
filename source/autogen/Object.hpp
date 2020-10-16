@@ -62,3 +62,7 @@ struct Array {
 
 template <auto>
 const char* get_method_name();
+
+inline bool is_null(const void* ptr) {
+    return ptr == nullptr;
+}

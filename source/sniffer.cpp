@@ -107,19 +107,19 @@ private:
 
         std::filesystem::create_directories(REPLAY_DIR);
         auto filename = REPLAY_DIR / fmt::format("replay_{}.aurp", utils::get_date_string(std::chrono::system_clock::now()));
-        m_stream = std::fstream(filename, std::fstream::out | std::fstream::binary);
+        m_stream.open(filename, std::fstream::out | std::fstream::binary);
 
-        fmt::print("Start recording..\n");
+        fmt::print("Start recording.. ({})\n", is_started());
     }
 
     void stop() {
-        m_stream = std::fstream{};
+        m_stream.close();
 
-        fmt::print("Stop recording..\n");
+        fmt::print("Stop recording.. ({})\n", is_started());
     }
 
     bool is_started() {
-        return !!m_stream;
+        return m_stream.is_open();
     }
 
     void try_stop_round() {
@@ -163,22 +163,23 @@ private:
         }
     }
 
+    static bool is_player_valid(const GameData::PlayerInfo* player) {
+        return !is_null(player) &&
+               !is_null(player->_object) &&
+               !is_null(player->_object->NetTransform);
+    }
+
     void on_frame(const GameData* game) {
         static periodic_printer printer("replay_tracer::on_frame", std::chrono::seconds(1));
         const auto print = printer.get_printer();
 
-        print("game = {}\n", fmt::ptr(game));
-
-        for (const auto& player : *game->AllPlayers) {
-            if (!player->_object) {
-                print("player {} is null, do nothing\n", player->PlayerId);
-                return;
-            }
-        }
+        print("game = {}, players = {}\n", fmt::ptr(game), fmt::ptr(game->AllPlayers));
 
         std::map<std::uint8_t, player_state> current_player_states;
         for (const auto& player : *game->AllPlayers) {
-            current_player_states.emplace(player->PlayerId, player_state(*player));
+            if (is_player_valid(player)) {
+                current_player_states.emplace(player->PlayerId, player_state(*player));
+            }
         }
 
         // TODO: replace with std::views::keys
@@ -232,13 +233,13 @@ private:
             original(self);
 
             auto game = GameData::instance();
-            if (!game) {
+            if (is_null(game)) {
                 print("GameData::instance() is null\n");
                 return;
             }
 
             const auto game_state = AmongUsClient::Instance()->GameState;
-            print("game state = {}\n", game_state);
+            print("game state = {}, is_started = {}\n", game_state, is_started());
 
             if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended) {
                 this->try_stop_round();
@@ -259,7 +260,11 @@ private:
             original(args...);
 
             for (const auto& player : *GameData::instance()->AllPlayers) {
-                if (!player->Tasks || player->Tasks->size() == 0) {
+                if (player->Disconnected) {
+                    continue;
+                }
+
+                if (is_null(player->Tasks) || player->Tasks->size() == 0) {
                     return;
                 }
             }
