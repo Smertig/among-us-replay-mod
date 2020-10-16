@@ -95,17 +95,6 @@ class replay_tracer {
 
 public:
     static void init() {
-        const auto game_version = UnityEngine::Application::get_version();
-        if (game_version != mod_info::compatible_game_version) {
-            const auto msg = fmt::format("{} was built for Amons Us v{}.\nYour game version is v{}.\n\nIt may not work as expected.",
-                                         mod_info::name,
-                                         mod_info::compatible_game_version,
-                                         game_version
-                                         );
-
-            utils::msgbox_warning(msg);
-        }
-
         instance();
     }
 
@@ -291,5 +280,21 @@ private:
 };
 
 void enable_sniffer() {
+    try {
+        mod_info::get_game_version();
+    }
+    catch (...) {
+        const auto msg = fmt::format(
+            "{} v{} doesn't support Among Us v{}.\n"
+            "Try to download newer/older release from https://github.com/Smertig/among-us-replay-mod/releases",
+            mod_info::name,
+            mod_info::version,
+            UnityEngine::Application::get_version()
+        );
+
+        utils::msgbox_warning(msg);
+        return;
+    }
+
     replay_tracer::init();
 }

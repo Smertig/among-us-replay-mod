@@ -2,10 +2,16 @@
 
 #include <string_view>
 
+enum class game_version {
+    v2020_6_9s,
+    v2020_9_22s
+};
+
 namespace mod_info {
 
-constexpr std::string_view name                    = "Replay Mod";
-constexpr std::string_view version                 = "0.5.1";
-constexpr std::string_view compatible_game_version = "2020.9.22";
+constexpr std::string_view name    = "Replay Mod";
+constexpr std::string_view version = "0.5.1";
+
+game_version get_game_version();
 
 } // namespace mod_info

@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME} SHARED
         ${PROJECT_SOURCE_DIR}/source/sniffer.cpp
         ${PROJECT_SOURCE_DIR}/source/utils/encoding.cpp
         ${PROJECT_SOURCE_DIR}/source/utils/utils.cpp
+        ${PROJECT_SOURCE_DIR}/source/utils/mod_info.cpp
         )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX)
