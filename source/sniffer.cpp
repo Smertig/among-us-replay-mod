@@ -87,7 +87,7 @@ class replay_tracer {
             ser.write(is_dead);
             ser.write(is_disconnected);
 
-            ser.write<std::uint8_t>(tasks.size());
+            ser.write(static_cast<std::uint8_t>(tasks.size()));
             for (const auto& task : tasks) {
                 ser.write(task);
             }
@@ -206,7 +206,7 @@ private:
         // Dump state
         write_entry_header(entry_type::frame_data);
         write(need_refresh);
-        write<std::uint8_t>(diff.size());
+        write(static_cast<std::uint8_t>(diff.size()));
         for (const auto& [id, state] : diff) {
             write(id, state);
         }
