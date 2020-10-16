@@ -155,7 +155,7 @@ public:
         write(DUMP_BINARY_VERSION);
         write(std::time(nullptr));
         write(mod_info::version);
-        write(mod_info::compatible_game_version);
+        write(UnityEngine::Application::get_version());
         write(ship->Type);
         write(static_cast<std::uint32_t>(game->AllPlayers->size()));
         for (const auto player : *game->AllPlayers) {
