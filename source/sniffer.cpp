@@ -6,6 +6,7 @@
 #include "utils/utils.hpp"
 #include "utils/mod_info.hpp"
 #include "utils/binary_serializer.hpp"
+#include "utils/periodic_printer.hpp"
 
 #include <autogen/RpcCalls.hpp>
 #include <autogen/PlayerControl.hpp>
@@ -98,11 +99,9 @@ public:
         instance();
     }
 
+private:
     void start() {
-        if (is_started()) {
-            // TODO: log
-            stop();
-        }
+        try_stop_round();
 
         const std::filesystem::path REPLAY_DIR = "./replay";
 
@@ -121,6 +120,12 @@ public:
 
     bool is_started() {
         return !!m_stream;
+    }
+
+    void try_stop_round() {
+        if (is_started()) {
+            stop();
+        }
     }
 
     void try_start_round() {
@@ -159,8 +164,14 @@ public:
     }
 
     void on_frame(const GameData* game) {
+        static periodic_printer printer("replay_tracer::on_frame", std::chrono::seconds(1));
+        const auto print = printer.get_printer();
+
+        print("game = {}\n", fmt::ptr(game));
+
         for (const auto& player : *game->AllPlayers) {
             if (!player->_object) {
+                print("player {} is null, do nothing\n", player->PlayerId);
                 return;
             }
         }
@@ -200,9 +211,10 @@ public:
         }
 
         m_players = std::move(current_player_states);
+
+        print("diff is recorded ok, size {}\n", diff.size());
     }
 
-private:
     static replay_tracer& instance() {
         static replay_tracer instance_;
         return instance_;
@@ -214,14 +226,22 @@ private:
 
     void init_hooks() {
         ::hook_method<&InnerNet::InnerNetClient::Update>([this](auto original, auto self) {
+            static periodic_printer printer("InnerNet::InnerNetClient::Update", std::chrono::seconds(1));
+            const auto print = printer.get_printer();
+
             original(self);
 
             auto game = GameData::instance();
-            if (!game) return;
+            if (!game) {
+                print("GameData::instance() is null\n");
+                return;
+            }
 
             const auto game_state = AmongUsClient::Instance()->GameState;
-            if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended && this->is_started()) {
-                this->stop();
+            print("game state = {}\n", game_state);
+
+            if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended) {
+                this->try_stop_round();
             }
 
             if (this->is_started()) {
