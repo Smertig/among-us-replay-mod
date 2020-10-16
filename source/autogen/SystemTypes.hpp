@@ -2,9 +2,10 @@
 
 #include <cstdint>
 
-// HBKFJKIHEFM since 2020.9.22
+// HBKFJKIHEFM in 2020.9.22
+// NAKOBFDMIMP in 2020.10.8i
 enum class SystemTypes : std::uint8_t {
-    Hallway = 0,
+    Hallway = 0, // [marker]
     Storage = 1,
     Cafeteria = 2,
     Reactor = 3,

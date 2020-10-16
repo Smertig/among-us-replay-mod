@@ -6,11 +6,12 @@
 
 struct PlayerControl;
 
+// MCOJPKFLEIL in 2020.10.8i
 struct PlayerTask : UnityEngine::MonoBehaviour {
     std::int32_t _Index;
     std::uint32_t _Id;
     PlayerControl* _Owner;
-    SystemTypes StartAt;
+    SystemTypes StartAt; // [marker]
     TaskTypes TaskType;
     struct Minigame_o *MinigamePrefab;
     bool HasLocation;

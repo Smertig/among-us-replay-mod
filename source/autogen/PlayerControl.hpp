@@ -6,10 +6,11 @@
 struct PlayerTask;
 struct CustomNetworkTransform;
 
+// IHFJHCCJLKB in 2020.10.8i
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
-    float MaxReportDistance;
+    float MaxReportDistance; // [marker]
     bool moveable;
     bool inVent;
     struct GameData_PlayerInfo_o *_cachedData;
@@ -43,10 +44,12 @@ struct PlayerControl : InnerNet::InnerNetObject {
         switch (mod_info::get_game_version()) {
             case game_version::v2020_6_9s:  return Class<PlayerControl>::find("PlayerControl");
             case game_version::v2020_9_22s: return Class<PlayerControl>::find("PlayerControl");
+            case game_version::v2020_10_8i: return Class<PlayerControl>::find("IHFJHCCJLKB");
         }
         return nullptr;
     }
 
+    // [marker] SetTasks in dump.cs
     void SetTasks(void*);
 };
 CHECK_TYPE(PlayerControl, 0x90);
@@ -56,6 +59,7 @@ const char* get_method_name<&PlayerControl::SetTasks>() {
     switch (mod_info::get_game_version()) {
         case game_version::v2020_6_9s:  return "SetTasks";
         case game_version::v2020_9_22s: return "SetTasks";
+        case game_version::v2020_10_8i: return "SetTasks";
     }
     return nullptr;
 }

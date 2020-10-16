@@ -4,8 +4,10 @@
 
 namespace InnerNet {
 
+// PJBHKAHJEMG in 2020.10.8i
 struct InnerNetClient : UnityEngine::MonoBehaviour {
-    // InnerNetClient.IFLBIJFJPMK since 2020.9.22
+    // InnerNetClient.IFLBIJFJPMK in 2020.9.22
+    // PJBHKAHJEMG.KDKPEGOCIJA in 2020.10.8i
     enum class GameStates : std::int32_t {
         NotJoined = 0,
         Joined = 1,
@@ -13,7 +15,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
         Ended = 3,
     };
 
-    float MinSendInterval;
+    float MinSendInterval; // [marker]
     std::uint32_t NetIdCnt;
     float timer;
     struct InnerNet_InnerNetObject_array* SpawnableObjects;
@@ -41,9 +43,9 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
 
     static Class<InnerNetClient>* get_class() {
         switch (mod_info::get_game_version()) {
-            case game_version::v2020_6_9s:
-            case game_version::v2020_9_22s:
-                return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
+            case game_version::v2020_6_9s:  return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
+            case game_version::v2020_9_22s: return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
+            case game_version::v2020_10_8i: return Class<InnerNetClient>::find("PJBHKAHJEMG");
         }
         return nullptr;
     }
@@ -56,5 +58,10 @@ CHECK_TYPE(InnerNetClient, 0x68);
 
 template <>
 const char* get_method_name<&InnerNet::InnerNetClient::Update>() {
-    return "Update";
+    switch (mod_info::get_game_version()) {
+        case game_version::v2020_6_9s:  return "Update";
+        case game_version::v2020_9_22s: return "Update";
+        case game_version::v2020_10_8i: return "Update";
+    }
+    return nullptr;
 }

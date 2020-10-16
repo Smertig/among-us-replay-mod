@@ -2,7 +2,8 @@
 
 #include <cstdint>
 
-// FPHOMIDIMBN since 2020.9.22
+// FPHOMIDIMBN in 2020.9.22
+// JHNKMAGPAEP in 2020.10.8i
 enum class RpcCalls : std::uint8_t {
     PlayAnimation = 0,
     CompleteTask = 1,

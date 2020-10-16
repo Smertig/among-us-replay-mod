@@ -6,17 +6,22 @@
 
 struct PlayerControl;
 
+// KIOIFEIADMB in 2020.10.8i
 struct GameData : InnerNet::InnerNetObject {
-    // GameData.CBOMPDNBEIF since 2020.9.22
+    // GameData.CBOMPDNBEIF in 2020.9.22
+    // KIOIFEIADMB.FAECJOFPICI in 2020.10.8i
     struct TaskInfo : ::Object {
+        // [marker] is PlayerInfo.Tasks
         std::uint32_t Id;
         std::uint8_t TypeId;
         bool Complete;
     };
     CHECK_TYPE(TaskInfo, 0x8);
 
-    // GameData.IHEKEPMDGIJ since 2020.9.22
+    // GameData.IHEKEPMDGIJ in 2020.9.22
+    // KIOIFEIADMB.IOHELPMOCLM in 2020.10.8i
     struct PlayerInfo : ::Object {
+        // no [marker], search for 'killer'
         std::uint8_t PlayerId;
         System::String* PlayerName;
         std::uint8_t ColorId;
@@ -31,7 +36,7 @@ struct GameData : InnerNet::InnerNetObject {
     };
     CHECK_TYPE(PlayerInfo, 0x28);
 
-    System::Collections::Generic::List<PlayerInfo>* AllPlayers;
+    System::Collections::Generic::List<PlayerInfo>* AllPlayers; // [marker]
     std::int32_t TotalTasks;
     std::int32_t CompletedTasks;
 
@@ -43,6 +48,7 @@ struct GameData : InnerNet::InnerNetObject {
         switch (mod_info::get_game_version()) {
             case game_version::v2020_6_9s:  return Class<GameData>::find("GameData");
             case game_version::v2020_9_22s: return Class<GameData>::find("GameData");
+            case game_version::v2020_10_8i: return Class<GameData>::find("KIOIFEIADMB");
         }
         return nullptr;
     }

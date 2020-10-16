@@ -4,6 +4,7 @@
 #include <autogen/UnityEngine/Vector2.hpp>
 #include <autogen/UnityEngine/Color.hpp>
 
+// FMDGHKGPBPP in 2020.10.8i
 struct ShipStatus : InnerNet::InnerNetObject {
     enum class MapType : std::int32_t {
         Ship = 0,
@@ -12,7 +13,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     };
 
     UnityEngine::Color CameraColor;
-    float MaxLightRadius;
+    float MaxLightRadius; // [marker]
     float MinLightRadius;
     float MapScale;
     struct MapBehaviour_o* MapPrefab;
@@ -50,6 +51,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     float Timer;
     float EmergencyCooldown;
     MapType Type;
+    // std::int32_t HBFNNGCEGNI; // since 2020.10.8i
 
     struct StaticFields {
         ShipStatus* Instance;
@@ -59,6 +61,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
         switch (mod_info::get_game_version()) {
             case game_version::v2020_6_9s:  return Class<ShipStatus>::find("ShipStatus");
             case game_version::v2020_9_22s: return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2020_10_8i: return Class<ShipStatus>::find("FMDGHKGPBPP");
         }
         return nullptr;
     }
@@ -76,6 +79,7 @@ const char* get_method_name<&ShipStatus::Begin>() {
     switch (mod_info::get_game_version()) {
         case game_version::v2020_6_9s:  return "Begin";
         case game_version::v2020_9_22s: return "Begin";
+        case game_version::v2020_10_8i: return "Begin";
     }
     return nullptr;
 }

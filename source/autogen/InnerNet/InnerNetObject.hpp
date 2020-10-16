@@ -4,8 +4,9 @@
 
 namespace InnerNet {
 
+// OMAONGEPDJH in 2020.10.8i
 struct InnerNetObject : UnityEngine::MonoBehaviour {
-    std::uint32_t SpawnId;
+    std::uint32_t SpawnId; // [marker]
     std::uint32_t NetId;
     std::uint32_t DirtyBits;
     std::uint8_t SpawnFlags;
