@@ -4,6 +4,7 @@
 #include "dynamic_proc.hpp"
 
 #include <rcmp/low_level.hpp>
+#include <fmt/format.h>
 
 inline const auto il2cpp_class_get_method_from_name = dynamic_proc<const il2cpp::MethodInfo*(il2cpp::Il2CppClass*, const char*, int)>("GameAssembly.dll", "il2cpp_class_get_method_from_name");
 inline const auto il2cpp_class_from_name = dynamic_proc<il2cpp::Il2CppClass*(const il2cpp::Il2CppImage*, const char*, const char*)>("GameAssembly.dll", "il2cpp_class_from_name");

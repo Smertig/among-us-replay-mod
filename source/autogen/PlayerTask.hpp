@@ -15,9 +15,5 @@ struct PlayerTask : UnityEngine::MonoBehaviour {
     struct Minigame_o *MinigamePrefab;
     bool HasLocation;
     bool LocationDirty;
-
-    std::int32_t get_TaskStep() const {
-        return get_cached_method<&PlayerTask::get_TaskStep>("get_TaskStep")(this);
-    }
 };
 CHECK_TYPE(PlayerTask, 0x20);

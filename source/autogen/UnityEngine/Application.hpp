@@ -1,6 +1,7 @@
 #pragma once
 
 #include <autogen/Object.hpp>
+#include <autogen/System/String.hpp>
 
 #include <string>
 

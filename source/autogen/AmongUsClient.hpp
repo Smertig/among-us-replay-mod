@@ -21,7 +21,11 @@ struct AmongUsClient : InnerNet::InnerNetClient {
     };
 
     static Class<AmongUsClient>* get_class() {
-        return Class<AmongUsClient>::find("AmongUsClient");
+        switch (mod_info::get_game_version()) {
+            case game_version::v2020_6_9s:  return Class<AmongUsClient>::find("AmongUsClient");
+            case game_version::v2020_9_22s: return Class<AmongUsClient>::find("AmongUsClient");
+        }
+        return nullptr;
     }
 
     static AmongUsClient* Instance() {

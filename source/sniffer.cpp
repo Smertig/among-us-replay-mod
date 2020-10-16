@@ -213,7 +213,7 @@ private:
     }
 
     void init_hooks() {
-        hook_method<void(*)(void*)>("InnerNet", "InnerNetClient", "Update", [this](auto original, auto self) {
+        ::hook_method<&InnerNet::InnerNetClient::Update>([this](auto original, auto self) {
             original(self);
 
             auto game = GameData::instance();
@@ -229,13 +229,13 @@ private:
             }
         });
 
-        hook_method<void(*)(ShipStatus*)>("ShipStatus", "Begin", [this](auto original, ShipStatus* self) {
+        ::hook_method<&ShipStatus::Begin>([this](auto original, ShipStatus* self) {
             original(self);
 
             this->try_start_round();
         });
 
-        hook_method<void(*)(PlayerControl*, void*)>("PlayerControl", "SetTasks", [this](auto original, auto... args) {
+        ::hook_method<&PlayerControl::SetTasks>([this](auto original, auto... args) {
             original(args...);
 
             for (const auto& player : *GameData::instance()->AllPlayers) {

@@ -38,7 +38,23 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     GameStates GameState;
     struct System_Collections_Generic_List_Action__o *TempQueue;
     bool appPaused;
+
+    static Class<InnerNetClient>* get_class() {
+        switch (mod_info::get_game_version()) {
+            case game_version::v2020_6_9s:
+            case game_version::v2020_9_22s:
+                return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
+        }
+        return nullptr;
+    }
+
+    void Update();
 };
 CHECK_TYPE(InnerNetClient, 0x68);
 
 } // namespace InnerNet
+
+template <>
+const char* get_method_name<&InnerNet::InnerNetClient::Update>() {
+    return "Update";
+}

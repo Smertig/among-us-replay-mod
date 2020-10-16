@@ -1,13 +1,12 @@
 #pragma once
 
-#include <utils/il2cpp_core.hpp>
+#include <utils/il2cpp.hpp>
+#include <utils/mod_info.hpp>
 #include <cstddef>
 #include <cstdint>
 #include <type_traits>
 
 #include <rcmp/low_level.hpp>
-
-// TODO: move to System?
 
 #define CHECK_TYPE(Type, Size) static_assert(sizeof(Type) == Size + sizeof(il2cpp::Il2CppObject)); static_assert(std::is_base_of_v<il2cpp::Il2CppObject, Type>)
 
@@ -60,3 +59,6 @@ struct Array {
     il2cpp::il2cpp_array_size_t max_length;
     T* m_Items[65535];
 };
+
+template <auto>
+const char* get_method_name();

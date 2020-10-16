@@ -40,7 +40,11 @@ struct GameData : InnerNet::InnerNetObject {
     };
 
     static Class<GameData>* get_class() {
-        return Class<GameData>::find("GameData");
+        switch (mod_info::get_game_version()) {
+            case game_version::v2020_6_9s:  return Class<GameData>::find("GameData");
+            case game_version::v2020_9_22s: return Class<GameData>::find("GameData");
+        }
+        return nullptr;
     }
 
     static GameData* instance() {

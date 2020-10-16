@@ -38,5 +38,24 @@ struct PlayerControl : InnerNet::InnerNetObject {
     struct System_Collections_Generic_List_IUsable__o *newItemsInRange;
     std::uint8_t scannerCount;
     bool infectedSet;
+
+    static Class<PlayerControl>* get_class() {
+        switch (mod_info::get_game_version()) {
+            case game_version::v2020_6_9s:  return Class<PlayerControl>::find("PlayerControl");
+            case game_version::v2020_9_22s: return Class<PlayerControl>::find("PlayerControl");
+        }
+        return nullptr;
+    }
+
+    void SetTasks(void*);
 };
 CHECK_TYPE(PlayerControl, 0x90);
+
+template <>
+const char* get_method_name<&PlayerControl::SetTasks>() {
+    switch (mod_info::get_game_version()) {
+        case game_version::v2020_6_9s:  return "SetTasks";
+        case game_version::v2020_9_22s: return "SetTasks";
+    }
+    return nullptr;
+}

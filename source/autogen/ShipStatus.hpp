@@ -56,11 +56,26 @@ struct ShipStatus : InnerNet::InnerNetObject {
     };
 
     static Class<ShipStatus>* get_class() {
-        return Class<ShipStatus>::find("ShipStatus");
+        switch (mod_info::get_game_version()) {
+            case game_version::v2020_6_9s:  return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2020_9_22s: return Class<ShipStatus>::find("ShipStatus");
+        }
+        return nullptr;
     }
 
     static ShipStatus* instance() {
         return get_class()->statics()->Instance;
     }
+
+    void Begin();
 };
 CHECK_TYPE(ShipStatus, 0xD0);
+
+template <>
+const char* get_method_name<&ShipStatus::Begin>() {
+    switch (mod_info::get_game_version()) {
+        case game_version::v2020_6_9s:  return "Begin";
+        case game_version::v2020_9_22s: return "Begin";
+    }
+    return nullptr;
+}
