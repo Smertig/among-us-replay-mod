@@ -4,14 +4,15 @@
 
 #include <rcmp/codegen.hpp>
 #include <autogen/Object.hpp>
+#include <spdlog/spdlog.h>
 
 template <class Signature, class F>
 void hook_method(const char* namespace_, const char* class_, const char* method, F&& callback) {
-    fmt::print("try hook {}::{}::{}\n", namespace_, class_, method);
+    spdlog::info("try hook {}::{}::{}", namespace_, class_, method);
 
     auto method_address = rcmp::bit_cast<std::uintptr_t>(find_method<Signature>(namespace_, class_, method));
     if (!method_address) {
-        fmt::print("unable to hook - method not found\n");
+        spdlog::error("unable to hook - method not found");
         return;
     }
 
@@ -47,7 +48,7 @@ void hook_method(F&& callback) {
 
     ::il2cpp::Il2CppClass* class_ = class_t::get_class();
     if (!class_) {
-        fmt::print("unable to hook - class not found\n");
+        spdlog::error("unable to hook - class not found");
         return;
     }
 

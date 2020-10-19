@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include <fmt/format.h>
+#include <spdlog/spdlog.h>
 
 class periodic_printer {
     using clock_t = std::chrono::steady_clock;
@@ -30,8 +31,7 @@ public:
                 return;
             }
 
-            fmt::print("{}: ", m_prefix);
-            fmt::print(std::forward<decltype(args)>(args)...);
+            spdlog::info("{}: {}", m_prefix, fmt::format(std::forward<decltype(args)>(args)...));
         };
     }
 };

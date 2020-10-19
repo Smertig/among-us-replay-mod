@@ -1,5 +1,6 @@
 #include <fmt/format.h>
 #include <magic_enum.hpp>
+#include <spdlog/spdlog.h>
 
 #include "utils/hook.hpp"
 #include "utils/enums.hpp"
@@ -7,6 +8,7 @@
 #include "utils/mod_info.hpp"
 #include "utils/binary_serializer.hpp"
 #include "utils/periodic_printer.hpp"
+#include "utils/logger.hpp"
 
 #include <autogen/RpcCalls.hpp>
 #include <autogen/PlayerControl.hpp>
@@ -109,13 +111,13 @@ private:
         auto filename = REPLAY_DIR / fmt::format("replay_{}.aurp", utils::get_date_string(std::chrono::system_clock::now()));
         m_stream.open(filename, std::fstream::out | std::fstream::binary);
 
-        fmt::print("Start recording.. ({})\n", is_started());
+        spdlog::info("Start recording.. ({})", is_started());
     }
 
     void stop() {
         m_stream.close();
 
-        fmt::print("Stop recording.. ({})\n", is_started());
+        spdlog::info("Stop recording.. ({})", is_started());
     }
 
     bool is_started() {
@@ -129,7 +131,7 @@ private:
     }
 
     void try_start_round() {
-        fmt::print("try start round..\n");
+        spdlog::trace("try start round..");
 
         if (!is_started()) {
             start();
@@ -173,7 +175,7 @@ private:
         static periodic_printer printer("replay_tracer::on_frame", std::chrono::seconds(1));
         const auto print = printer.get_printer();
 
-        print("game = {}, players = {}\n", fmt::ptr(game), fmt::ptr(game->AllPlayers));
+        print("game = {}, players = {}", fmt::ptr(game), fmt::ptr(game->AllPlayers));
 
         std::map<std::uint8_t, player_state> current_player_states;
         for (const auto& player : *game->AllPlayers) {
@@ -213,7 +215,7 @@ private:
 
         m_players = std::move(current_player_states);
 
-        print("diff is recorded ok, size {}\n", diff.size());
+        print("diff is recorded ok, size {}", diff.size());
     }
 
     static replay_tracer& instance() {
@@ -234,12 +236,12 @@ private:
 
             auto game = GameData::instance();
             if (is_null(game)) {
-                print("GameData::instance() is null\n");
+                print("GameData::instance() is null");
                 return;
             }
 
             const auto game_state = AmongUsClient::Instance()->GameState;
-            print("game state = {}, is_started = {}\n", game_state, is_started());
+            print("game state = {}, is_started = {}", game_state, is_started());
 
             if (game_state == AmongUsClient::GameStates::NotJoined || game_state == AmongUsClient::GameStates::Ended) {
                 this->try_stop_round();
@@ -305,6 +307,8 @@ private:
 };
 
 void enable_sniffer() {
+    spdlog::set_level(spdlog::level::off);
+
     try {
         mod_info::get_game_version();
     }
@@ -321,5 +325,6 @@ void enable_sniffer() {
         return;
     }
 
+    init_logger();
     replay_tracer::init();
 }
