@@ -5,6 +5,7 @@
 #include <autogen/UnityEngine/Color.hpp>
 
 // FMDGHKGPBPP in 2020.10.8i
+// DAFPFFMKPJJ in 2020.10.22s
 struct ShipStatus : InnerNet::InnerNetObject {
     enum class MapType : std::int32_t {
         Ship = 0,
@@ -59,9 +60,10 @@ struct ShipStatus : InnerNet::InnerNetObject {
 
     static Class<ShipStatus>* get_class() {
         switch (mod_info::get_game_version()) {
-            case game_version::v2020_6_9s:  return Class<ShipStatus>::find("ShipStatus");
-            case game_version::v2020_9_22s: return Class<ShipStatus>::find("ShipStatus");
-            case game_version::v2020_10_8i: return Class<ShipStatus>::find("FMDGHKGPBPP");
+            case game_version::v2020_6_9s:   return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2020_9_22s:  return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2020_10_8i:  return Class<ShipStatus>::find("FMDGHKGPBPP");
+            case game_version::v2020_10_22s: return Class<ShipStatus>::find("DAFPFFMKPJJ");
         }
         return nullptr;
     }
@@ -70,6 +72,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
         return get_class()->statics()->Instance;
     }
 
+    // No [marker], name shouldn't change
     void Begin();
 };
 CHECK_TYPE(ShipStatus, 0xD0);
@@ -77,9 +80,10 @@ CHECK_TYPE(ShipStatus, 0xD0);
 template <>
 const char* get_method_name<&ShipStatus::Begin>() {
     switch (mod_info::get_game_version()) {
-        case game_version::v2020_6_9s:  return "Begin";
-        case game_version::v2020_9_22s: return "Begin";
-        case game_version::v2020_10_8i: return "Begin";
+        case game_version::v2020_6_9s:   return "Begin";
+        case game_version::v2020_9_22s:  return "Begin";
+        case game_version::v2020_10_8i:  return "Begin";
+        case game_version::v2020_10_22s: return "Begin";
     }
     return nullptr;
 }

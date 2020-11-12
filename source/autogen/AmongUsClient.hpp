@@ -3,6 +3,7 @@
 #include <autogen/InnerNet/InnerNetClient.hpp>
 
 // KIIHPMJOOGI in 2020.10.8i
+// JNFEHNLGIFF in 2020.10.22s
 struct AmongUsClient : InnerNet::InnerNetClient {
     std::int32_t AutoOpenStore; // [marker]
     std::int32_t GameMode;
@@ -23,9 +24,10 @@ struct AmongUsClient : InnerNet::InnerNetClient {
 
     static Class<AmongUsClient>* get_class() {
         switch (mod_info::get_game_version()) {
-            case game_version::v2020_6_9s:  return Class<AmongUsClient>::find("AmongUsClient");
-            case game_version::v2020_9_22s: return Class<AmongUsClient>::find("AmongUsClient");
-            case game_version::v2020_10_8i: return Class<AmongUsClient>::find("KIIHPMJOOGI");
+            case game_version::v2020_6_9s:   return Class<AmongUsClient>::find("AmongUsClient");
+            case game_version::v2020_9_22s:  return Class<AmongUsClient>::find("AmongUsClient");
+            case game_version::v2020_10_8i:  return Class<AmongUsClient>::find("KIIHPMJOOGI");
+            case game_version::v2020_10_22s: return Class<AmongUsClient>::find("JNFEHNLGIFF");
         }
         return nullptr;
     }

@@ -7,6 +7,7 @@ struct PlayerTask;
 struct CustomNetworkTransform;
 
 // IHFJHCCJLKB in 2020.10.8i
+// GLHCHLEDNBA in 2020.20.22s
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
@@ -42,9 +43,10 @@ struct PlayerControl : InnerNet::InnerNetObject {
 
     static Class<PlayerControl>* get_class() {
         switch (mod_info::get_game_version()) {
-            case game_version::v2020_6_9s:  return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2020_9_22s: return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2020_10_8i: return Class<PlayerControl>::find("IHFJHCCJLKB");
+            case game_version::v2020_6_9s:   return Class<PlayerControl>::find("PlayerControl");
+            case game_version::v2020_9_22s:  return Class<PlayerControl>::find("PlayerControl");
+            case game_version::v2020_10_8i:  return Class<PlayerControl>::find("IHFJHCCJLKB");
+            case game_version::v2020_10_22s: return Class<PlayerControl>::find("GLHCHLEDNBA");
         }
         return nullptr;
     }
@@ -57,9 +59,10 @@ CHECK_TYPE(PlayerControl, 0x90);
 template <>
 const char* get_method_name<&PlayerControl::SetTasks>() {
     switch (mod_info::get_game_version()) {
-        case game_version::v2020_6_9s:  return "SetTasks";
-        case game_version::v2020_9_22s: return "SetTasks";
-        case game_version::v2020_10_8i: return "SetTasks";
+        case game_version::v2020_6_9s:   return "SetTasks";
+        case game_version::v2020_9_22s:  return "SetTasks";
+        case game_version::v2020_10_8i:  return "SetTasks";
+        case game_version::v2020_10_22s: return "SetTasks";
     }
     return nullptr;
 }
