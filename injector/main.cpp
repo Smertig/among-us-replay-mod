@@ -3,10 +3,27 @@
 #include <optional>
 #include <array>
 #include <filesystem>
+#include <sstream>
 
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <psapi.h>
+
+class error_message {
+    std::stringstream m_stream;
+
+public:
+    ~error_message() {
+        ::MessageBoxA(nullptr, m_stream.str().c_str(), "Injector", MB_ICONERROR);
+    }
+
+    template <class T>
+    error_message& operator<<(const T& value) {
+        m_stream << value;
+        std::cerr << value;
+        return *this;
+    }
+};
 
 std::optional<DWORD> find_process(std::string_view name) {
     HANDLE snapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
@@ -55,7 +72,7 @@ const char* default_dll_name = "among-us-replay-mod.dll";
 const char* default_process_name = "Among Us.exe";
 
 void print_usage() {
-    std::cerr << "usage: injector.exe [dll_path=\"" << default_dll_name << "\"] [process_name=\"" << default_process_name << "\"]\n";
+    error_message{} << "usage: injector.exe [dll_path=\"" << default_dll_name << "\"] [process_name=\"" << default_process_name << "\"]\n";
 }
 
 int main(int argc, const char** argv) {
@@ -73,12 +90,12 @@ int main(int argc, const char** argv) {
     std::array<char, MAX_PATH> dll_path{};
     ::GetFullPathNameA(short_dll_path, dll_path.size(), dll_path.data(), nullptr);
 
-    std::cout << "injecting " << dll_path.data() << " into " << process_name << "..\n";
+    std::cout << "injecting " << dll_path.data() << " into " << process_name << ".." << std::endl;
 
     // get process
     auto process_id = find_process(process_name);
     if (!process_id) {
-        std::cerr << "unable to find process '" << process_name << "'\n";
+        error_message{} << "unable to find process '" << process_name << "'\n";
         return 1;
     }
 
@@ -90,9 +107,11 @@ int main(int argc, const char** argv) {
         ::WriteProcessMemory(process_handle, allocated_memory, dll_path.data(), dll_path.size(), nullptr);
 
         ::CreateRemoteThread(process_handle, nullptr, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, allocated_memory, 0, nullptr);
+
+        ::MessageBoxA(nullptr, "Successfully injected", "Injector", MB_ICONINFORMATION);
     }
     else {
-        std::cerr << "dll " << dll_path.data() << " is already loaded into '" << process_name << "'\n";
+        error_message{} << "dll " << dll_path.data() << " is already loaded into '" << process_name << "'\n";
     }
     ::CloseHandle(process_handle);
 
