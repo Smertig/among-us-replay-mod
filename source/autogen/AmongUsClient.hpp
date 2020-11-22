@@ -4,6 +4,7 @@
 
 // KIIHPMJOOGI in 2020.10.8i
 // JNFEHNLGIFF in 2020.10.22s
+// HJNEPPHDLBA in 2020.11.4s
 struct AmongUsClient : InnerNet::InnerNetClient {
     std::int32_t AutoOpenStore; // [marker]
     std::int32_t GameMode;
@@ -28,6 +29,7 @@ struct AmongUsClient : InnerNet::InnerNetClient {
             case game_version::v2020_9_22s:  return Class<AmongUsClient>::find("AmongUsClient");
             case game_version::v2020_10_8i:  return Class<AmongUsClient>::find("KIIHPMJOOGI");
             case game_version::v2020_10_22s: return Class<AmongUsClient>::find("JNFEHNLGIFF");
+            case game_version::v2020_11_4s:  return Class<AmongUsClient>::find("HJNEPPHDLBA");
         }
         return nullptr;
     }

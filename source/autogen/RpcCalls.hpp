@@ -5,8 +5,9 @@
 // FPHOMIDIMBN in 2020.9.22
 // JHNKMAGPAEP in 2020.10.8i
 // FOBFDOIGNKE in 2020.10.22s
+// GODNMPFGJHC in 2020.11.4s
 enum class RpcCalls : std::uint8_t {
-    PlayAnimation = 0,
+    PlayAnimation = 0, // [marker]
     CompleteTask = 1,
     SyncSettings = 2,
     SetInfected = 3,
