@@ -6,6 +6,7 @@
 // JHNKMAGPAEP in 2020.10.8i
 // FOBFDOIGNKE in 2020.10.22s
 // GODNMPFGJHC in 2020.11.4s
+// FBGKAFLCOBO in 2020.11.17s
 enum class RpcCalls : std::uint8_t {
     PlayAnimation = 0, // [marker]
     CompleteTask = 1,

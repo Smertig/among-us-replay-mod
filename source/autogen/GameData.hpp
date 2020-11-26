@@ -9,11 +9,13 @@ struct PlayerControl;
 // KIOIFEIADMB in 2020.10.8i
 // BAGGGBBOHOH in 2020.10.22s
 // BOMCDPPPECM in 2020.11.4s
+// FLIHHNFFPAO in 2020.11.17s
 struct GameData : InnerNet::InnerNetObject {
     // GameData.CBOMPDNBEIF in 2020.9.22
     // KIOIFEIADMB.FAECJOFPICI in 2020.10.8i
     // BAGGGBBOHOH.ALLADIFCEHO in 2020.10.22s
     // BOMCDPPPECM.IDFPHCCPCJC in 2020.11.4s
+    // FLIHHNFFPAO.CJOIAHBNANN in 2020.11.17s
     struct TaskInfo : ::Object {
         // [marker] is PlayerInfo.Tasks
         std::uint32_t Id;
@@ -26,6 +28,7 @@ struct GameData : InnerNet::InnerNetObject {
     // KIOIFEIADMB.IOHELPMOCLM in 2020.10.8i
     // BAGGGBBOHOH.FGMBFCIIILC in 2020.10.22s
     // BOMCDPPPECM.FDGKOOFKODI in 2020.11.4s
+    // FLIHHNFFPAO.LBGGNMFGAOO in 2020.11.17s
     struct PlayerInfo : ::Object {
         // no [marker], search for 'killer'
         std::uint8_t PlayerId;
@@ -57,6 +60,7 @@ struct GameData : InnerNet::InnerNetObject {
             case game_version::v2020_10_8i:  return Class<GameData>::find("KIOIFEIADMB");
             case game_version::v2020_10_22s: return Class<GameData>::find("BAGGGBBOHOH");
             case game_version::v2020_11_4s:  return Class<GameData>::find("BOMCDPPPECM");
+            case game_version::v2020_11_17s: return Class<GameData>::find("FLIHHNFFPAO");
         }
         return nullptr;
     }

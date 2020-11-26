@@ -9,6 +9,7 @@ struct CustomNetworkTransform;
 // IHFJHCCJLKB in 2020.10.8i
 // GLHCHLEDNBA in 2020.10.22s
 // APNNOJFGDGP in 2020.11.4s
+// JENJGDMOEOC in 2020.11.17s
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
@@ -49,6 +50,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
             case game_version::v2020_10_8i:  return Class<PlayerControl>::find("IHFJHCCJLKB");
             case game_version::v2020_10_22s: return Class<PlayerControl>::find("GLHCHLEDNBA");
             case game_version::v2020_11_4s:  return Class<PlayerControl>::find("APNNOJFGDGP");
+            case game_version::v2020_11_17s: return Class<PlayerControl>::find("JENJGDMOEOC");
         }
         return nullptr;
     }
@@ -66,6 +68,7 @@ const char* get_method_name<&PlayerControl::SetTasks>() {
         case game_version::v2020_10_8i:  return "SetTasks";
         case game_version::v2020_10_22s: return "SetTasks";
         case game_version::v2020_11_4s:  return "SetTasks";
+        case game_version::v2020_11_17s: return "SetTasks";
     }
     return nullptr;
 }
