@@ -8,6 +8,7 @@
 // DAFPFFMKPJJ in 2020.10.22s
 // OLEKJGCEKAM in 2020.11.4s
 // EIEMHBCHLNI in 2020.11.17s
+// HLBNNHFCNAJ in 2020.12.9s
 struct ShipStatus : InnerNet::InnerNetObject {
     enum class MapType : std::int32_t {
         Ship = 0,
@@ -68,6 +69,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
             case game_version::v2020_10_22s: return Class<ShipStatus>::find("DAFPFFMKPJJ");
             case game_version::v2020_11_4s:  return Class<ShipStatus>::find("OLEKJGCEKAM");
             case game_version::v2020_11_17s: return Class<ShipStatus>::find("EIEMHBCHLNI");
+            case game_version::v2020_12_9s:  return Class<ShipStatus>::find("HLBNNHFCNAJ");
         }
         return nullptr;
     }
@@ -90,6 +92,7 @@ const char* get_method_name<&ShipStatus::Begin>() {
         case game_version::v2020_10_22s: return "Begin";
         case game_version::v2020_11_4s:  return "Begin";
         case game_version::v2020_11_17s: return "Begin";
+        case game_version::v2020_12_9s:  return "Begin";
     }
     return nullptr;
 }

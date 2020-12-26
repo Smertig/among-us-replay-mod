@@ -10,6 +10,7 @@ struct PlayerControl;
 // LOBBAHDOFGE in 2020.10.22s
 // FKAPFNAKPBG in 2020.11.4s
 // CLCMPFJIIEN in 2020.11.17s
+// PILBGHDHJLH in 2020.12.9s
 struct PlayerTask : UnityEngine::MonoBehaviour {
     std::int32_t _Index;
     std::uint32_t _Id;
