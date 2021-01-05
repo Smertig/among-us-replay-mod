@@ -39,16 +39,46 @@ All the replays can be later found at `/Steam/steamapps/common/Among Us/replay` 
 
 - Check out [Among Us Replayer](https://github.com/Smertig/among-us-replayer) for detailed instruction
 
-## Replay Demo
+### Replay Demo
 
 [Youtube](https://youtu.be/j3DKQzkoJLM)
 
-## License
+## Development
+
+:warning: This section is only for developers, you don't need all this stuff if you just want to use mod. 
+
+### How To Build
+
+Requirements:
+- Windows
+- C++20 compiler (tested on MSVC 16.7.5)
+- CMake 3.17
+
+```shell script
+# 0. Clone repo *with submodules*
+git clone --recursive https://github.com/Smertig/among-us-replay-mod
+cd among-us-replay-mod
+
+# 1. Create build directory
+mkdir build
+cd build
+
+# 2. Configure CMake project
+cmake .. -DCMAKE_BUILD_TYPE=Release -A Win32
+
+# 3. Build project (both mod and injector)
+cmake --build . --config Release
+
+# 4. Check out build artifacts at 'among-us-replay-mod/build/Release' directory
+```
+
+### License
 
 - MIT
 
-## References
+### References
 
 - ![](https://img.shields.io/github/stars/Neargye/magic_enum.svg?style=social) [magic_enum](https://github.com/Neargye/magic_enum) by [Neargye](https://github.com/Neargye)
 - ![](https://img.shields.io/github/stars/fmtlib/fmt.svg?style=social) [fmtlib](https://github.com/fmtlib/fmt) by [vitaut](https://github.com/vitaut)
+- ![](https://img.shields.io/github/stars/gabime/spdlog.svg?style=social) [spdlog](https://github.com/gabime/spdlog) by [gabime](https://github.com/gabime)
 - ![](https://img.shields.io/github/stars/Smertig/rcmp.svg?style=social) [rcmp](https://github.com/Smertig/rcmp) by [Smertig](https://github.com/Smertig)
