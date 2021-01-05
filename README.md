@@ -41,7 +41,7 @@ All the replays can be later found at `/Steam/steamapps/common/Among Us/replay` 
 
 ## Replay Demo
 
-[Youtube](https://youtu.be/WmfwYmQp_js)
+[Youtube](https://youtu.be/j3DKQzkoJLM)
 
 ## License
 
