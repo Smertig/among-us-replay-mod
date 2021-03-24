@@ -9,6 +9,7 @@ namespace InnerNet {
 // MILGAMDLABC in 2020.11.4s
 // JBBAENBKONG in 2020.11.17s
 // NJAHILONGKN in 2020.12.9s
+// InnerNetObject in 2021.3.5s
 struct InnerNetObject : UnityEngine::MonoBehaviour {
     std::uint32_t SpawnId; // [marker]
     std::uint32_t NetId;

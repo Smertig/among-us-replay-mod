@@ -9,7 +9,8 @@ enum class game_version {
     v2020_10_22s,
     v2020_11_4s,
     v2020_11_17s,
-    v2020_12_9s
+    v2020_12_9s,
+    v2021_3_5s,
 };
 
 namespace mod_info {

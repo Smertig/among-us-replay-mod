@@ -8,6 +8,7 @@
 // KKNINLOPJHM in 2020.11.4s
 // IGJKPGJPEFN in 2020.11.17s
 // BOOMIBKNGPP in 2020.12.9s
+// FHLMPHLKGCK in 2021.3.5s
 enum class TaskTypes : std::int32_t {
     SubmitScan = 0, // [marker]
     PrimeShields = 1,
@@ -52,4 +53,21 @@ enum class TaskTypes : std::int32_t {
     AlignTelescope = 40,
     RecordTemperature = 41,
     RebootWifi = 42,
+    PolishRuby = 43, // since 2021.3.5s
+    ResetBreakers = 44, // since 2021.3.5s
+    Decontaminate = 45, // since 2021.3.5s
+    MakeBurger = 46, // since 2021.3.5s
+    UnlockSafe = 47, // since 2021.3.5s
+    SortRecords = 48, // since 2021.3.5s
+    PutAwayPistols = 49, // since 2021.3.5s
+    FixShower = 50, // since 2021.3.5s
+    CleanToilet = 51, // since 2021.3.5s
+    DressMannequin = 52, // since 2021.3.5s
+    PickUpTowels = 53, // since 2021.3.5s
+    RewindTapes = 54, // since 2021.3.5s
+    StartFans = 55, // since 2021.3.5s
+    DevelopPhotos = 56, // since 2021.3.5s
+    GetBiggolSword = 57, // since 2021.3.5s
+    PutAwayRifles = 58, // since 2021.3.5s
+    StopCharles = 59, // since 2021.3.5s
 };

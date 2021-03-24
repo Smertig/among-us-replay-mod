@@ -22,6 +22,8 @@ struct ShipStatus : InnerNet::InnerNetObject {
     float MapScale;
     struct MapBehaviour_o* MapPrefab;
     struct ExileController_o* ExileCutscenePrefab;
+    struct OverlayKillAnimation_o* EmergencyOverlay; // since 2021.3.5s
+    struct OverlayKillAnimation_o* ReportOverlay; // since 2021.3.5s
     UnityEngine::Vector2 InitialSpawnCenter;
     UnityEngine::Vector2 MeetingSpawnCenter;
     UnityEngine::Vector2 MeetingSpawnCenter2;
@@ -35,10 +37,12 @@ struct ShipStatus : InnerNet::InnerNetObject {
     struct PlainDoor_array* AllDoors;
     struct Console_array* AllConsoles;
     struct System_Collections_Generic_Dictionary_HBKFJKIHEFM__GCEKFCICMHL__o* Systems;
+    struct StringNames_array* SystemNames; // since 2021.3.5s
     struct AKPFLLKKOBN_array* _HMALBFKGHFE_k__BackingField;
     struct PlainShipRoom_array* _PDBPIILBHAE_k__BackingField;
     struct System_Collections_Generic_Dictionary_HBKFJKIHEFM__PlainShipRoom__o* _FNFHCOHJDBK_k__BackingField;
     struct Vent_array* _LFOLHNDFOLH_k__BackingField;
+    struct UnityEngine_AudioClip_o* SabotageSound; // since 2021.3.5s
     struct UnityEngine_AnimationClip_array* WeaponFires;
     struct PowerTools_SpriteAnim_o* WeaponsImage;
     struct UnityEngine_AudioClip_array* VentMoveSounds;
@@ -55,7 +59,8 @@ struct ShipStatus : InnerNet::InnerNetObject {
     float Timer;
     float EmergencyCooldown;
     MapType Type;
-    // std::int32_t HBFNNGCEGNI; // since 2020.10.8i
+    bool OOHLKHLGEEC; // since 2021.3.5s
+    std::int32_t HBFNNGCEGNI; // since 2020.10.8i
 
     struct StaticFields {
         ShipStatus* Instance;
@@ -70,6 +75,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
             case game_version::v2020_11_4s:  return Class<ShipStatus>::find("OLEKJGCEKAM");
             case game_version::v2020_11_17s: return Class<ShipStatus>::find("EIEMHBCHLNI");
             case game_version::v2020_12_9s:  return Class<ShipStatus>::find("HLBNNHFCNAJ");
+            case game_version::v2021_3_5s:   return Class<ShipStatus>::find("ShipStatus");
         }
         return nullptr;
     }
@@ -81,7 +87,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     // No [marker], name shouldn't change
     void Begin();
 };
-CHECK_TYPE(ShipStatus, 0xD0);
+CHECK_TYPE(ShipStatus, 0xE8);
 
 template <>
 const char* get_method_name<&ShipStatus::Begin>() {
@@ -93,6 +99,7 @@ const char* get_method_name<&ShipStatus::Begin>() {
         case game_version::v2020_11_4s:  return "Begin";
         case game_version::v2020_11_17s: return "Begin";
         case game_version::v2020_12_9s:  return "Begin";
+        case game_version::v2021_3_5s:   return "Begin";
     }
     return nullptr;
 }

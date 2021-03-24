@@ -8,6 +8,7 @@
 // GODNMPFGJHC in 2020.11.4s
 // FBGKAFLCOBO in 2020.11.17s
 // KPLHBGFHGBI in 2020.12.9s
+// OGHLFADACAG in 2021.3.5s
 enum class RpcCalls : std::uint8_t {
     PlayAnimation = 0, // [marker]
     CompleteTask = 1,
@@ -31,7 +32,7 @@ enum class RpcCalls : std::uint8_t {
     EnterVent = 19,
     ExitVent = 20,
     SnapTo = 21,
-    Close = 22,
+    CloseMeeting = 22, // renamed in 2021.3.5s
     VotingComplete = 23,
     CastVote = 24,
     ClearVote = 25,
@@ -40,4 +41,6 @@ enum class RpcCalls : std::uint8_t {
     RepairSystem = 28,
     SetTasks = 29,
     UpdateGameData = 30,
+    ClimbLadder = 31, // since 2021.3.5s
+    UsePlatform = 32, // since 2021.3.5s
 };

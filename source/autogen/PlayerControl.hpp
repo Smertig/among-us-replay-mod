@@ -11,6 +11,7 @@ struct CustomNetworkTransform;
 // APNNOJFGDGP in 2020.11.4s
 // JENJGDMOEOC in 2020.11.17s
 // FFGALNAPKCD in 2020.12.9s
+// PlayerControl in 2021.3.5
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
@@ -26,6 +27,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
     struct TextRenderer_o *nameText;
     struct LightSource_o *LightPrefab;
     struct LightSource_o *myLight;
+    struct TextTranslator_o *textTranslator; // since 2021.3.5
     struct UnityEngine_Collider2D_o *Collider;
     struct PlayerPhysics_o *MyPhysics;
     CustomNetworkTransform *NetTransform;
@@ -37,7 +39,9 @@ struct PlayerControl : InnerNet::InnerNetObject {
     struct PowerTools_SpriteAnim_array *ScannerAnims;
     struct UnityEngine_SpriteRenderer_array *ScannersImages;
     struct IUsable_o *closest;
-    bool isNew;
+    bool isNew;   // may be changed in 2021.3.5
+    bool isDummy; // since 2021.3.5
+    bool notRealPlayer; // since 2021.3.5
     struct System_Collections_Generic_Dictionary_Collider2D__IUsable__o *cache;
     struct System_Collections_Generic_List_IUsable__o *itemsInRange;
     struct System_Collections_Generic_List_IUsable__o *newItemsInRange;
@@ -53,6 +57,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
             case game_version::v2020_11_4s:  return Class<PlayerControl>::find("APNNOJFGDGP");
             case game_version::v2020_11_17s: return Class<PlayerControl>::find("JENJGDMOEOC");
             case game_version::v2020_12_9s:  return Class<PlayerControl>::find("FFGALNAPKCD");
+            case game_version::v2021_3_5s:   return Class<PlayerControl>::find("PlayerControl");
         }
         return nullptr;
     }
@@ -60,7 +65,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
     // [marker] SetTasks in dump.cs
     void SetTasks(void*);
 };
-CHECK_TYPE(PlayerControl, 0x90);
+CHECK_TYPE(PlayerControl, 0x94);
 
 template <>
 const char* get_method_name<&PlayerControl::SetTasks>() {
@@ -72,6 +77,7 @@ const char* get_method_name<&PlayerControl::SetTasks>() {
         case game_version::v2020_11_4s:  return "SetTasks";
         case game_version::v2020_11_17s: return "SetTasks";
         case game_version::v2020_12_9s:  return "SetTasks";
+        case game_version::v2021_3_5s:   return "SetTasks";
     }
     return nullptr;
 }

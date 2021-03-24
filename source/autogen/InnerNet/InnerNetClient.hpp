@@ -9,6 +9,7 @@ namespace InnerNet {
 // DBDDAJAICFN in 2020.11.4s
 // FMJPJKCNIKM in 2020.11.17s
 // KHNHJFFECBP in 2020.12.9s
+// InnerNetClient in 2021.3.5s
 struct InnerNetClient : UnityEngine::MonoBehaviour {
     // InnerNetClient.IFLBIJFJPMK in 2020.9.22
     // PJBHKAHJEMG.KDKPEGOCIJA in 2020.10.8i
@@ -16,6 +17,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     // DBDDAJAICFN.DKEKFCCGGEO in 2020.11.4s
     // FMJPJKCNIKM.ONHEJJJIKDI in 2020.11.17s
     // KHNHJFFECBP.KGEKNMMAKKN in 2020.12.9s
+    // InnerNetClient.CGJDIIGHLGC in 2021.3.5s
     enum class GameStates : std::int32_t {
         NotJoined = 0, // [marker]
         Joined = 1,
@@ -26,12 +28,14 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     float MinSendInterval; // [marker]
     std::uint32_t NetIdCnt;
     float timer;
-    struct InnerNet_InnerNetObject_array* SpawnableObjects;
+    struct UnityEngine_AddressableAssets_AssetReference_array* SpawnableObjects; // type changed in 2021.3.5s
+    struct UnityEngine_GameObject_array* NonAddressableSpawnableObjects; // since 2021.3.5s
     bool InOnlineScene;
     struct System_Collections_Generic_HashSet_uint__o* DestroyedObjects;
     struct System_Collections_Generic_List_InnerNetObject__o* allObjects;
     struct System_Collections_Generic_Dictionary_uint__InnerNetObject__o* allObjectsFast;
     struct Hazel_MessageWriter_array* Streams;
+    std::int32_t ODDLPKAHFCG; // since 2021.3.5s
     struct System_String_o* networkAddress;
     std::int32_t networkPort;
     struct Hazel_Udp_UnityUdpClientConnection_o* connection;
@@ -58,6 +62,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
             case game_version::v2020_11_4s:  return Class<InnerNetClient>::find("DBDDAJAICFN");
             case game_version::v2020_11_17s: return Class<InnerNetClient>::find("FMJPJKCNIKM");
             case game_version::v2020_12_9s:  return Class<InnerNetClient>::find("KHNHJFFECBP");
+            case game_version::v2021_3_5s:   return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
         }
         return nullptr;
     }
@@ -65,7 +70,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     // No [marker], name shouldn't change
     void Update();
 };
-CHECK_TYPE(InnerNetClient, 0x68);
+CHECK_TYPE(InnerNetClient, 0x70);
 
 } // namespace InnerNet
 
@@ -79,6 +84,7 @@ const char* get_method_name<&InnerNet::InnerNetClient::Update>() {
         case game_version::v2020_11_4s:  return "Update";
         case game_version::v2020_11_17s: return "Update";
         case game_version::v2020_12_9s:  return "Update";
+        case game_version::v2021_3_5s:   return "Update";
     }
     return nullptr;
 }

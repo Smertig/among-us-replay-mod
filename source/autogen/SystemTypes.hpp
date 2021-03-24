@@ -8,6 +8,7 @@
 // PECPIEDFOHP in 2020.11.4s
 // AOKAHIJINGJ in 2020.11.17s
 // LJFDDJHBOGF in 2020.12.9s
+// GOODOHMJKLN in 2021.3.5s
 enum class SystemTypes : std::uint8_t {
     Hallway = 0, // [marker]
     Storage = 1,
@@ -39,4 +40,21 @@ enum class SystemTypes : std::uint8_t {
     Outside = 27,
     Specimens = 28,
     BoilerRoom = 29,
+    VaultRoom = 30, // since 2021.3.5s
+    Cockpit = 31, // since 2021.3.5s
+    Armory = 32, // since 2021.3.5s
+    Kitchen = 33, // since 2021.3.5s
+    ViewingDeck = 34, // since 2021.3.5s
+    HallOfPortraits = 35, // since 2021.3.5s
+    CargoBay = 36, // since 2021.3.5s
+    Ventilation = 37, // since 2021.3.5s
+    Showers = 38, // since 2021.3.5s
+    Engine = 39, // since 2021.3.5s
+    Brig = 40, // since 2021.3.5s
+    MeetingRoom = 41, // since 2021.3.5s
+    Records = 42, // since 2021.3.5s
+    Lounge = 43, // since 2021.3.5s
+    GapRoom = 44, // since 2021.3.5s
+    MainHall = 45, // since 2021.3.5s
+    Medical = 46, // since 2021.3.5s
 };

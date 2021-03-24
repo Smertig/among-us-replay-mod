@@ -7,14 +7,16 @@
 // HJNEPPHDLBA in 2020.11.4s
 // MMMGPAPEEBJ in 2020.11.17s
 // FMLLKEACGIO in 2020.12.9s
+// AmongUsClient in 2021.3.5s
 struct AmongUsClient : InnerNet::InnerNetClient {
-    std::int32_t AutoOpenStore; // [marker]
+    // std::int32_t AutoOpenStore; // until 2021.3.5s
     std::int32_t GameMode;
     struct System_String_o* OnlineScene;
     struct System_String_o* MainMenuScene;
     struct GameData_o* GameDataPrefab;
     struct PlayerControl_o* PlayerPrefab;
-    struct System_Collections_Generic_List_ShipStatus__o* ShipPrefabs;
+    struct System_Collections_Generic_List_AssetReference__o* ShipPrefabs; // type changed in 2021.3.5s
+    struct System_Collections_Generic_List_GameObject__o* NonAddressableShipPrefabs; // since 2021.3.5s
     std::int32_t TutorialMapId;
     float SpawnRadius;
     std::int32_t discoverState;
@@ -34,6 +36,7 @@ struct AmongUsClient : InnerNet::InnerNetClient {
             case game_version::v2020_11_4s:  return Class<AmongUsClient>::find("HJNEPPHDLBA");
             case game_version::v2020_11_17s: return Class<AmongUsClient>::find("MMMGPAPEEBJ");
             case game_version::v2020_12_9s:  return Class<AmongUsClient>::find("FMLLKEACGIO");
+            case game_version::v2021_3_5s:   return Class<AmongUsClient>::find("AmongUsClient");
         }
         return nullptr;
     }
@@ -42,4 +45,4 @@ struct AmongUsClient : InnerNet::InnerNetClient {
         return get_class()->statics()->Instance;
     }
 };
-CHECK_TYPE(AmongUsClient, 0x98);
+CHECK_TYPE(AmongUsClient, 0xA0);
