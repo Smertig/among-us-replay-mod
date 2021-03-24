@@ -312,13 +312,17 @@ void enable_sniffer() {
     try {
         mod_info::get_game_version();
     }
-    catch (...) {
+    catch (std::exception& e) {
         const auto msg = fmt::format(
             "{} v{} doesn't support Among Us v{}.\n"
-            "Try to download newer/older release from https://github.com/Smertig/among-us-replay-mod/releases",
+            "\n"
+            "Reason: {}.\n"
+            "\n"
+            "All mod versions are at https://github.com/Smertig/among-us-replay-mod/releases",
             mod_info::name,
             mod_info::version,
-            UnityEngine::Application::get_version()
+            UnityEngine::Application::get_version(),
+            e.what()
         );
 
         utils::msgbox_warning(msg);
