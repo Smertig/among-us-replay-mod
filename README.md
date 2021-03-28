@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   <a href="https://github.com/Smertig/among-us-replay-mod/releases/latest"><img src="https://img.shields.io/github/v/release/Smertig/among-us-replay-mod.svg" alt="Latest Release"></a>
   <a href="https://github.com/Smertig/among-us-replay-mod/actions"><img src="https://github.com/Smertig/among-us-replay-mod/workflows/Build%20On%20Push/badge.svg" alt="GitHub Actions"></a>
+  <img src="https://img.shields.io/github/downloads/smertig/among-us-replay-mod/total">
 </p>
 
 # Among Us Replay Mod</b>
