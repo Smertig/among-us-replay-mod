@@ -11,7 +11,8 @@ struct CustomNetworkTransform;
 // APNNOJFGDGP in 2020.11.4s
 // JENJGDMOEOC in 2020.11.17s
 // FFGALNAPKCD in 2020.12.9s
-// PlayerControl in 2021.3.5
+// PlayerControl in 2021.3.5s
+// PlayerControl in 2021.4.12s
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
@@ -24,7 +25,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
     struct KillAnimation_array *KillAnimations;
     float killTimer;
     std::int32_t RemainingEmergencies;
-    struct TextRenderer_o *nameText;
+    struct TextMeshPro_o *nameText; // type changed since 2021.4.12s
     struct LightSource_o *LightPrefab;
     struct LightSource_o *myLight;
     struct TextTranslator_o *textTranslator; // since 2021.3.5
@@ -58,6 +59,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
             case game_version::v2020_11_17s: return Class<PlayerControl>::find("JENJGDMOEOC");
             case game_version::v2020_12_9s:  return Class<PlayerControl>::find("FFGALNAPKCD");
             case game_version::v2021_3_5s:   return Class<PlayerControl>::find("PlayerControl");
+            case game_version::v2021_4_12s:  return Class<PlayerControl>::find("PlayerControl");
         }
         return nullptr;
     }
@@ -78,6 +80,7 @@ const char* get_method_name<&PlayerControl::SetTasks>() {
         case game_version::v2020_11_17s: return "SetTasks";
         case game_version::v2020_12_9s:  return "SetTasks";
         case game_version::v2021_3_5s:   return "SetTasks";
+        case game_version::v2021_4_12s:  return "SetTasks";
     }
     return nullptr;
 }

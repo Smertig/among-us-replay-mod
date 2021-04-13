@@ -48,6 +48,10 @@ struct Object : il2cpp::Il2CppObject {
         static const auto method = get_method<Signature>(name);
         return method;
     }
+
+    std::string_view get_class_name() const {
+        return ::il2cpp_type_get_name(::il2cpp_class_get_type(this->klass));
+    }
 };
 
 CHECK_TYPE(Object, 0);
