@@ -131,12 +131,29 @@ private:
     }
 
     void try_start_round() {
-        spdlog::trace("try start round..");
-
         if (!is_started()) {
             start();
             on_round_start(ShipStatus::instance(), GameData::instance());
         }
+    }
+
+    static std::int32_t get_map_id(const ShipStatus* ship) {
+        static const std::map<std::string_view, std::int32_t> mapping = {
+            { "ShipStatus",      0 },
+            { "MiraShipStatus",  1 },
+            { "PolusShipStatus", 2 },
+            { "AirshipStatus",   3 },
+        };
+
+        const auto ship_name = ship->get_class_name();
+
+        const auto it = mapping.find(ship_name);
+        if (it == mapping.end()) {
+            spdlog::error("unknown ship status class: '{}'", ship_name);
+            return -1;
+        }
+
+        return it->second;
     }
 
     void on_round_start(const ShipStatus* ship, const GameData* game) {
@@ -152,12 +169,12 @@ private:
         write(std::time(nullptr));
         write(mod_info::version);
         write(UnityEngine::Application::get_version());
-        write(ship->Type);
+        write(get_map_id(ship));
         write(static_cast<std::uint32_t>(game->AllPlayers->size()));
         for (const auto player : *game->AllPlayers) {
             write(player->PlayerId);
             write(player->PlayerName);
-            write(player->ColorId);
+            write(static_cast<std::uint8_t>(player->ColorId)); // TODO: update aurp version and remove cast
             write(player->HatId);
             write(player->PetId);
             write(player->SkinId);
@@ -247,31 +264,36 @@ private:
                 this->try_stop_round();
             }
 
+            const bool should_be_started = [&]{
+                // TODO: won't work in local games, because of GameStates::Joined
+                if (game_state != AmongUsClient::GameStates::Started) {
+                    return false;
+                }
+
+                if (is_null(GameData::instance()) || is_null(ShipStatus::instance())) {
+                    return false;
+                }
+
+                for (const auto& player : *GameData::instance()->AllPlayers) {
+                    if (player->Disconnected) {
+                        continue;
+                    }
+
+                    if (is_null(player->Tasks) || player->Tasks->size() == 0) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }();
+
+            if (should_be_started) {
+                this->try_start_round();
+            }
+
             if (this->is_started()) {
                 this->on_frame(game);
             }
-        });
-
-        ::hook_method<&ShipStatus::Begin>([this](auto original, ShipStatus* self) {
-            original(self);
-
-            this->try_start_round();
-        });
-
-        ::hook_method<&PlayerControl::SetTasks>([this](auto original, auto... args) {
-            original(args...);
-
-            for (const auto& player : *GameData::instance()->AllPlayers) {
-                if (player->Disconnected) {
-                    continue;
-                }
-
-                if (is_null(player->Tasks) || player->Tasks->size() == 0) {
-                    return;
-                }
-            }
-
-            this->try_start_round();
         });
     }
 

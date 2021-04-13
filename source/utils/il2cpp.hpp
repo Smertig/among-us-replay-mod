@@ -14,6 +14,8 @@ inline const auto il2cpp_domain_get_assemblies = dynamic_proc<const il2cpp::Il2C
 inline const auto il2cpp_assembly_get_image = dynamic_proc<const il2cpp::Il2CppImage*(const il2cpp::Il2CppAssembly*)>("GameAssembly.dll", "il2cpp_assembly_get_image");
 inline const auto il2cpp_method_get_param_count = dynamic_proc<uint32_t(const il2cpp::MethodInfo*)>("GameAssembly.dll", "il2cpp_method_get_param_count");
 inline const auto il2cpp_method_get_name = dynamic_proc<const char*(const il2cpp::MethodInfo*)>("GameAssembly.dll", "il2cpp_method_get_name");
+inline const auto il2cpp_class_get_type = dynamic_proc<const il2cpp::Il2CppType*(const il2cpp::Il2CppClass*)>("GameAssembly.dll", "il2cpp_class_get_type");
+inline const auto il2cpp_type_get_name = dynamic_proc<const char*(const il2cpp::Il2CppType*)>("GameAssembly.dll", "il2cpp_type_get_name");
 
 inline il2cpp::Il2CppClass* find_class(const char* namespace_, const char* class_) {
     spdlog::trace("looking for class {} in namespace {}", class_, namespace_[0] ? namespace_ : "(none)");

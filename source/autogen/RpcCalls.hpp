@@ -9,6 +9,7 @@
 // FBGKAFLCOBO in 2020.11.17s
 // KPLHBGFHGBI in 2020.12.9s
 // OGHLFADACAG in 2021.3.5s
+// GLEJPDNDION in 2021.4.12s
 enum class RpcCalls : std::uint8_t {
     PlayAnimation = 0, // [marker]
     CompleteTask = 1,
@@ -40,7 +41,7 @@ enum class RpcCalls : std::uint8_t {
     CloseDoorsOfType = 27,
     RepairSystem = 28,
     SetTasks = 29,
-    UpdateGameData = 30,
+    // UpdateGameData = 30, // until 2021.4.12s
     ClimbLadder = 31, // since 2021.3.5s
     UsePlatform = 32, // since 2021.3.5s
 };

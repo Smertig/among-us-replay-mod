@@ -10,6 +10,7 @@ namespace InnerNet {
 // FMJPJKCNIKM in 2020.11.17s
 // KHNHJFFECBP in 2020.12.9s
 // InnerNetClient in 2021.3.5s
+// InnerNetClient in 2021.4.12s
 struct InnerNetClient : UnityEngine::MonoBehaviour {
     // InnerNetClient.IFLBIJFJPMK in 2020.9.22
     // PJBHKAHJEMG.KDKPEGOCIJA in 2020.10.8i
@@ -29,7 +30,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     std::uint32_t NetIdCnt;
     float timer;
     struct UnityEngine_AddressableAssets_AssetReference_array* SpawnableObjects; // type changed in 2021.3.5s
-    struct UnityEngine_GameObject_array* NonAddressableSpawnableObjects; // since 2021.3.5s
+    struct UnityEngine_InnerNetObject_array* NonAddressableSpawnableObjects; // since 2021.3.5s; UnityEngine_GameObject_array until 2021.4.12s
     bool InOnlineScene;
     struct System_Collections_Generic_HashSet_uint__o* DestroyedObjects;
     struct System_Collections_Generic_List_InnerNetObject__o* allObjects;
@@ -40,6 +41,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     std::int32_t networkPort;
     struct Hazel_Udp_UnityUdpClientConnection_o* connection;
     std::int32_t mode;
+    std::int32_t GameMode; // [enum] since 2021.4.12s
     std::int32_t GameId;
     std::int32_t HostId;
     std::int32_t ClientId;
@@ -63,6 +65,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
             case game_version::v2020_11_17s: return Class<InnerNetClient>::find("FMJPJKCNIKM");
             case game_version::v2020_12_9s:  return Class<InnerNetClient>::find("KHNHJFFECBP");
             case game_version::v2021_3_5s:   return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
+            case game_version::v2021_4_12s:  return Class<InnerNetClient>::find("InnerNet", "InnerNetClient");
         }
         return nullptr;
     }
@@ -70,7 +73,7 @@ struct InnerNetClient : UnityEngine::MonoBehaviour {
     // No [marker], name shouldn't change
     void Update();
 };
-CHECK_TYPE(InnerNetClient, 0x70);
+CHECK_TYPE(InnerNetClient, 0x74);
 
 } // namespace InnerNet
 
@@ -85,6 +88,7 @@ const char* get_method_name<&InnerNet::InnerNetClient::Update>() {
         case game_version::v2020_11_17s: return "Update";
         case game_version::v2020_12_9s:  return "Update";
         case game_version::v2021_3_5s:   return "Update";
+        case game_version::v2021_4_12s:  return "Update";
     }
     return nullptr;
 }

@@ -9,13 +9,9 @@
 // OLEKJGCEKAM in 2020.11.4s
 // EIEMHBCHLNI in 2020.11.17s
 // HLBNNHFCNAJ in 2020.12.9s
+// ShipStatus in 2021.3.5s
+// ShipStatus in 2021.4.12s
 struct ShipStatus : InnerNet::InnerNetObject {
-    enum class MapType : std::int32_t {
-        Ship = 0,
-        Hq = 1,
-        Pb = 2,
-    };
-
     UnityEngine::Color CameraColor;
     float MaxLightRadius; // [marker]
     float MinLightRadius;
@@ -58,7 +54,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     std::int32_t WeaponFireIdx;
     float Timer;
     float EmergencyCooldown;
-    MapType Type;
+    std::int32_t Type; // doesn't really help, no enum value for airship ¯\_(ツ)_/¯
     bool OOHLKHLGEEC; // since 2021.3.5s
     std::int32_t HBFNNGCEGNI; // since 2020.10.8i
 
@@ -76,6 +72,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
             case game_version::v2020_11_17s: return Class<ShipStatus>::find("EIEMHBCHLNI");
             case game_version::v2020_12_9s:  return Class<ShipStatus>::find("HLBNNHFCNAJ");
             case game_version::v2021_3_5s:   return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2021_4_12s:  return Class<ShipStatus>::find("ShipStatus");
         }
         return nullptr;
     }
@@ -100,6 +97,7 @@ const char* get_method_name<&ShipStatus::Begin>() {
         case game_version::v2020_11_17s: return "Begin";
         case game_version::v2020_12_9s:  return "Begin";
         case game_version::v2021_3_5s:   return "Begin";
+        case game_version::v2021_4_12s:  return "Begin";
     }
     return nullptr;
 }
