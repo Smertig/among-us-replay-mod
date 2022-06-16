@@ -22,6 +22,7 @@ game_version get_game_version() {
             { "2021.4.12",  game_version::v2021_4_12s  },
             { "2022.3.29",  game_version::v2022_3_29s  },
             { "2022.4.19",  game_version::v2022_4_19s  },
+            { "2022.4.29",  game_version::v2022_4_29s  },
         };
 
         static const std::map<game_version, std::string_view /* last supported mod version */> deprecated_versions {
@@ -33,7 +34,7 @@ game_version get_game_version() {
             { game_version::v2020_11_17s, "0.6.5" },
             { game_version::v2020_12_9s,  "0.6.5" },
             { game_version::v2021_3_5s,   "0.7.0" },
-            { game_version::v2021_4_12e,  "0.7.1" },
+            { game_version::v2021_4_12s,  "0.7.1" },
         };
 
         auto app_version = UnityEngine::Application::get_version();
