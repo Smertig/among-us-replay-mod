@@ -13,7 +13,6 @@
 #include <autogen/RpcCalls.hpp>
 #include <autogen/PlayerControl.hpp>
 #include <autogen/GameData.hpp>
-#include <autogen/PlayerTask.hpp>
 #include <autogen/CustomNetworkTransform.hpp>
 #include <autogen/AmongUsClient.hpp>
 #include <autogen/UnityEngine/Application.hpp>
