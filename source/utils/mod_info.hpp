@@ -13,7 +13,7 @@ enum class game_version {
     v2021_3_5s,
     v2021_4_12s,
     v2022_3_29s,
-    v2022_4_19e,
+    v2022_4_19s,
 };
 
 namespace mod_info {
