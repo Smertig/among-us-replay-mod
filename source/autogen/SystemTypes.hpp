@@ -2,16 +2,8 @@
 
 #include <cstdint>
 
-// HBKFJKIHEFM in 2020.9.22
-// NAKOBFDMIMP in 2020.10.8i
-// JBPEMAACAEP in 2020.10.22s
-// PECPIEDFOHP in 2020.11.4s
-// AOKAHIJINGJ in 2020.11.17s
-// LJFDDJHBOGF in 2020.12.9s
-// GOODOHMJKLN in 2021.3.5s
-// BCPJLGGNHBC in 2021.4.12s
 enum class SystemTypes : std::uint8_t {
-    Hallway = 0, // [marker]
+    Hallway = 0,
     Storage = 1,
     Cafeteria = 2,
     Reactor = 3,
@@ -41,21 +33,21 @@ enum class SystemTypes : std::uint8_t {
     Outside = 27,
     Specimens = 28,
     BoilerRoom = 29,
-    VaultRoom = 30, // since 2021.3.5s
-    Cockpit = 31, // since 2021.3.5s
-    Armory = 32, // since 2021.3.5s
-    Kitchen = 33, // since 2021.3.5s
-    ViewingDeck = 34, // since 2021.3.5s
-    HallOfPortraits = 35, // since 2021.3.5s
-    CargoBay = 36, // since 2021.3.5s
-    Ventilation = 37, // since 2021.3.5s
-    Showers = 38, // since 2021.3.5s
-    Engine = 39, // since 2021.3.5s
-    Brig = 40, // since 2021.3.5s
-    MeetingRoom = 41, // since 2021.3.5s
-    Records = 42, // since 2021.3.5s
-    Lounge = 43, // since 2021.3.5s
-    GapRoom = 44, // since 2021.3.5s
-    MainHall = 45, // since 2021.3.5s
-    Medical = 46, // since 2021.3.5s
+    VaultRoom = 30,
+    Cockpit = 31,
+    Armory = 32,
+    Kitchen = 33,
+    ViewingDeck = 34,
+    HallOfPortraits = 35,
+    CargoBay = 36,
+    Ventilation = 37,
+    Showers = 38,
+    Engine = 39,
+    Brig = 40,
+    MeetingRoom = 41,
+    Records = 42,
+    Lounge = 43,
+    GapRoom = 44,
+    MainHall = 45,
+    Medical = 46,
 };

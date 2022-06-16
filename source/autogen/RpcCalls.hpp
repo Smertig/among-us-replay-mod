@@ -2,16 +2,8 @@
 
 #include <cstdint>
 
-// FPHOMIDIMBN in 2020.9.22
-// JHNKMAGPAEP in 2020.10.8i
-// FOBFDOIGNKE in 2020.10.22s
-// GODNMPFGJHC in 2020.11.4s
-// FBGKAFLCOBO in 2020.11.17s
-// KPLHBGFHGBI in 2020.12.9s
-// OGHLFADACAG in 2021.3.5s
-// GLEJPDNDION in 2021.4.12s
 enum class RpcCalls : std::uint8_t {
-    PlayAnimation = 0, // [marker]
+    PlayAnimation = 0,
     CompleteTask = 1,
     SyncSettings = 2,
     SetInfected = 3,
@@ -33,7 +25,7 @@ enum class RpcCalls : std::uint8_t {
     EnterVent = 19,
     ExitVent = 20,
     SnapTo = 21,
-    CloseMeeting = 22, // renamed in 2021.3.5s
+    CloseMeeting = 22,
     VotingComplete = 23,
     CastVote = 24,
     ClearVote = 25,
@@ -41,7 +33,23 @@ enum class RpcCalls : std::uint8_t {
     CloseDoorsOfType = 27,
     RepairSystem = 28,
     SetTasks = 29,
-    // UpdateGameData = 30, // until 2021.4.12s
-    ClimbLadder = 31, // since 2021.3.5s
-    UsePlatform = 32, // since 2021.3.5s
+    ClimbLadder = 31,
+    UsePlatform = 32,
+    SendQuickChat = 33,
+    BootFromVent = 34,
+    UpdateSystem = 35,
+    SetVisor = 36,
+    SetNamePlate = 37,
+    SetLevel = 38,
+    SetHatStr = 39,
+    SetSkinStr = 40,
+    SetPetStr = 41,
+    SetVisorStr = 42,
+    SetNamePlateStr = 43,
+    SetRole = 44,
+    ProtectPlayer = 45,
+    Shapeshift = 46,
+    CheckMurder = 47,
+    CheckProtect = 48,
+    AdjustEscapeTimer = 49,
 };

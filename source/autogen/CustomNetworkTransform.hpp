@@ -4,17 +4,10 @@
 #include <autogen/UnityEngine/Vector2.hpp>
 #include <autogen/UnityEngine/Rigidbody2D.hpp>
 
-// LEAFKMLHONI in 2020.10.8i
-// HLNNOIPCILF in 2020.10.22s
-// BCKFLLHLHGP in 2020.11.4s
-// AMOIOPOABJF in 2020.11.17s
-// LNBAPKHKDPG in 2020.12.9s
-// CustomNetworkTransformin 2021.3.5s
-// CustomNetworkTransformin 2021.4.12s
 struct CustomNetworkTransform : InnerNet::InnerNetObject {
     struct FloatRange_o *XRange;
     struct FloatRange_o *YRange;
-    float sendInterval; // [marker]
+    float sendInterval;
     float snapThreshold;
     float interpolateMovement;
     UnityEngine::Rigidbody2D* body;

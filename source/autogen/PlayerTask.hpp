@@ -6,20 +6,13 @@
 
 struct PlayerControl;
 
-// MCOJPKFLEIL in 2020.10.8i
-// LOBBAHDOFGE in 2020.10.22s
-// FKAPFNAKPBG in 2020.11.4s
-// CLCMPFJIIEN in 2020.11.17s
-// PILBGHDHJLH in 2020.12.9s
-// PlayerTask in 2021.3.5s
-// PlayerTask in 2021.4.12s
 struct PlayerTask : UnityEngine::MonoBehaviour {
-    std::int32_t _Index;
-    std::uint32_t _Id;
-    PlayerControl* _Owner;
-    SystemTypes StartAt; // [marker]
+    std::int32_t _Index_k__BackingField;
+    std::uint32_t _Id_k__BackingField;
+    PlayerControl* _Owner_k__BackingField;
+    SystemTypes StartAt;
     TaskTypes TaskType;
-    struct Minigame_o *MinigamePrefab;
+    struct Minigame_o* MinigamePrefab;
     bool HasLocation;
     bool LocationDirty;
 };

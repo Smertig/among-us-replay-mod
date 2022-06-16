@@ -4,7 +4,6 @@
 
 struct PlayerControl;
 
-// RoleBehaviour since 2022.3.29s
 struct RoleBehaviour : UnityEngine::MonoBehaviour {
     std::uint16_t Role;
     std::int32_t StringName;

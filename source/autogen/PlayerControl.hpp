@@ -7,18 +7,12 @@
 struct PlayerTask;
 struct CustomNetworkTransform;
 
-// IHFJHCCJLKB in 2020.10.8i
-// GLHCHLEDNBA in 2020.10.22s
-// APNNOJFGDGP in 2020.11.4s
-// JENJGDMOEOC in 2020.11.17s
-// FFGALNAPKCD in 2020.12.9s
-// PlayerControl since 2021.3.5s
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;
     System::String* FriendCode;
     System::String* Puid;
-    float MaxReportDistance; // [marker]
+    float MaxReportDistance;
     bool moveable;
     struct System_Collections_Generic_List_PlayerBodySprite__o* BodySprites;
     struct PlayerBodySprite_o* CurrentBodySprite;
@@ -63,39 +57,14 @@ struct PlayerControl : InnerNet::InnerNetObject {
     bool roleAssigned;
 
     static Class<PlayerControl>* get_class() {
-        switch (mod_info::get_game_version()) {
-            case game_version::v2020_6_9s:   return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2020_9_22s:  return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2020_10_8i:  return Class<PlayerControl>::find("IHFJHCCJLKB");
-            case game_version::v2020_10_22s: return Class<PlayerControl>::find("GLHCHLEDNBA");
-            case game_version::v2020_11_4s:  return Class<PlayerControl>::find("APNNOJFGDGP");
-            case game_version::v2020_11_17s: return Class<PlayerControl>::find("JENJGDMOEOC");
-            case game_version::v2020_12_9s:  return Class<PlayerControl>::find("FFGALNAPKCD");
-            case game_version::v2021_3_5s:   return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2021_4_12s:  return Class<PlayerControl>::find("PlayerControl");
-            case game_version::v2022_3_29s:  return Class<PlayerControl>::find("PlayerControl");
-        }
-        return nullptr;
+        return Class<PlayerControl>::find("PlayerControl");
     }
 
-    // [marker] SetTasks in dump.cs
     void SetTasks(void*);
 };
 CHECK_TYPE(PlayerControl, 0xCC);
 
 template <>
 const char* get_method_name<&PlayerControl::SetTasks>() {
-    switch (mod_info::get_game_version()) {
-        case game_version::v2020_6_9s:   return "SetTasks";
-        case game_version::v2020_9_22s:  return "SetTasks";
-        case game_version::v2020_10_8i:  return "SetTasks";
-        case game_version::v2020_10_22s: return "SetTasks";
-        case game_version::v2020_11_4s:  return "SetTasks";
-        case game_version::v2020_11_17s: return "SetTasks";
-        case game_version::v2020_12_9s:  return "SetTasks";
-        case game_version::v2021_3_5s:   return "SetTasks";
-        case game_version::v2021_4_12s:  return "SetTasks";
-        case game_version::v2022_3_29s:  return "SetTasks";
-    }
-    return nullptr;
+    return "SetTasks";
 }
