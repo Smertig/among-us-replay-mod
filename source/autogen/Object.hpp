@@ -61,7 +61,7 @@ struct Array {
     il2cpp::Il2CppObject obj;
     il2cpp::Il2CppArrayBounds *bounds;
     il2cpp::il2cpp_array_size_t max_length;
-    T* m_Items[65535];
+    T m_Items[65535];
 };
 
 template <auto>

@@ -18,6 +18,8 @@
 #include <autogen/AmongUsClient.hpp>
 #include <autogen/UnityEngine/Application.hpp>
 #include <autogen/ShipStatus.hpp>
+#include <autogen/RoleBehaviour.hpp>
+#include <autogen/InnerNet/ClientData.hpp>
 
 #include <fstream>
 #include <chrono>
@@ -172,13 +174,17 @@ private:
         write(get_map_id(ship));
         write(static_cast<std::uint32_t>(game->AllPlayers->size()));
         for (const auto player : *game->AllPlayers) {
+            const auto client_data = AmongUsClient::Instance()->GetClientFromCharacter(player->_object);
+            assert(client_data);
+
             write(player->PlayerId);
-            write(player->PlayerName);
-            write(static_cast<std::uint8_t>(player->ColorId)); // TODO: update aurp version and remove cast
-            write(player->HatId);
-            write(player->PetId);
-            write(player->SkinId);
-            write(player->IsImpostor);
+            write(client_data->PlayerName);
+            // TODO: update aurp version, remove casts, use strings
+            write(static_cast<std::uint8_t>(client_data->ColorId)); // player->ColorId
+            write(static_cast<std::uint32_t>(0)); // player->HatId is System::String now
+            write(static_cast<std::uint32_t>(0)); // player->PetId is System::String now
+            write(static_cast<std::uint32_t>(0)); // player->SkinId is System::String now
+            write(player->Role->get_IsImpostor());
         }
     }
 
@@ -245,7 +251,7 @@ private:
     }
 
     void init_hooks() {
-        ::hook_method<&InnerNet::InnerNetClient::Update>([this](auto original, auto self) {
+        ::hook_method<&InnerNet::InnerNetClient::Update>([this](auto original, InnerNet::InnerNetClient* self) {
             static periodic_printer printer("InnerNet::InnerNetClient::Update", std::chrono::seconds(1));
             const auto print = printer.get_printer();
 
@@ -280,6 +286,10 @@ private:
                     }
 
                     if (is_null(player->Tasks) || player->Tasks->size() == 0) {
+                        return false;
+                    }
+
+                    if (self->GetClientFromCharacter(player->_object) == nullptr) {
                         return false;
                     }
                 }

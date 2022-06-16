@@ -11,7 +11,7 @@ struct List : ::Object {
     std::int32_t _version;
     struct Il2CppObject* _syncRoot;
 
-    using value_type = const T*;
+    using value_type = const T;
 
     const value_type* begin() const {
         return _items->m_Items;

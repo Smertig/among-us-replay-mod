@@ -7,22 +7,19 @@
 // HJNEPPHDLBA in 2020.11.4s
 // MMMGPAPEEBJ in 2020.11.17s
 // FMLLKEACGIO in 2020.12.9s
-// AmongUsClient in 2021.3.5s
-// AmongUsClient in 2021.4.12s
+// AmongUsClient since 2021.3.5s
 struct AmongUsClient : InnerNet::InnerNetClient {
-    // std::int32_t AutoOpenStore; // until 2021.3.5s
-    // std::int32_t GameMode; // until 2021.4.12s
     struct System_String_o* OnlineScene;
     struct System_String_o* MainMenuScene;
     struct GameData_o* GameDataPrefab;
     struct PlayerControl_o* PlayerPrefab;
-    struct System_Collections_Generic_List_AssetReference__o* ShipPrefabs; // type changed in 2021.3.5s
-    // struct System_Collections_Generic_List_GameObject__o* NonAddressableShipPrefabs; // since 2021.3.5s, until 2021.4.12s
+    struct System_Collections_Generic_List_AssetReference__o* ShipPrefabs;
     std::int32_t TutorialMapId;
     float SpawnRadius;
     std::int32_t discoverState;
     struct System_Collections_Generic_List_IDisconnectHandler__o* DisconnectHandlers;
     struct System_Collections_Generic_List_IGameListHandler__o* GameListHandlers;
+    std::int32_t CrossplayPrivilegeError;
 
     struct StaticFields {
         AmongUsClient* Instance;
@@ -39,6 +36,7 @@ struct AmongUsClient : InnerNet::InnerNetClient {
             case game_version::v2020_12_9s:  return Class<AmongUsClient>::find("FMLLKEACGIO");
             case game_version::v2021_3_5s:   return Class<AmongUsClient>::find("AmongUsClient");
             case game_version::v2021_4_12s:  return Class<AmongUsClient>::find("AmongUsClient");
+            case game_version::v2022_3_29s:  return Class<AmongUsClient>::find("AmongUsClient");
         }
         return nullptr;
     }
@@ -47,4 +45,4 @@ struct AmongUsClient : InnerNet::InnerNetClient {
         return get_class()->statics()->Instance;
     }
 };
-CHECK_TYPE(AmongUsClient, 0x9C);
+CHECK_TYPE(AmongUsClient, 0xB0);

@@ -9,17 +9,17 @@
 // OLEKJGCEKAM in 2020.11.4s
 // EIEMHBCHLNI in 2020.11.17s
 // HLBNNHFCNAJ in 2020.12.9s
-// ShipStatus in 2021.3.5s
-// ShipStatus in 2021.4.12s
+// ShipStatus since 2021.3.5s
 struct ShipStatus : InnerNet::InnerNetObject {
     UnityEngine::Color CameraColor;
-    float MaxLightRadius; // [marker]
+    float MaxLightRadius;
     float MinLightRadius;
     float MapScale;
     struct MapBehaviour_o* MapPrefab;
     struct ExileController_o* ExileCutscenePrefab;
-    struct OverlayKillAnimation_o* EmergencyOverlay; // since 2021.3.5s
-    struct OverlayKillAnimation_o* ReportOverlay; // since 2021.3.5s
+    struct MeetingCalledAnimation_o* EmergencyOverlay;
+    struct MeetingCalledAnimation_o* ReportOverlay;
+    struct UnityEngine_Sprite_o* MeetingBackground;
     UnityEngine::Vector2 InitialSpawnCenter;
     UnityEngine::Vector2 MeetingSpawnCenter;
     UnityEngine::Vector2 MeetingSpawnCenter2;
@@ -32,13 +32,13 @@ struct ShipStatus : InnerNet::InnerNetObject {
     struct SurvCamera_array* AllCameras;
     struct PlainDoor_array* AllDoors;
     struct Console_array* AllConsoles;
-    struct System_Collections_Generic_Dictionary_HBKFJKIHEFM__GCEKFCICMHL__o* Systems;
-    struct StringNames_array* SystemNames; // since 2021.3.5s
-    struct AKPFLLKKOBN_array* _HMALBFKGHFE_k__BackingField;
-    struct PlainShipRoom_array* _PDBPIILBHAE_k__BackingField;
-    struct System_Collections_Generic_Dictionary_HBKFJKIHEFM__PlainShipRoom__o* _FNFHCOHJDBK_k__BackingField;
-    struct Vent_array* _LFOLHNDFOLH_k__BackingField;
-    struct UnityEngine_AudioClip_o* SabotageSound; // since 2021.3.5s
+    struct System_Collections_Generic_Dictionary_SystemTypes__ISystemType__o* Systems;
+    struct StringNames_array* SystemNames;
+    struct IStepWatcher_array* _AllStepWatchers_k__BackingField;
+    struct PlainShipRoom_array* _AllRooms_k__BackingField;
+    struct System_Collections_Generic_Dictionary_SystemTypes__PlainShipRoom__o* _FastRooms_k__BackingField;
+    struct Vent_array* _AllVents_k__BackingField;
+    struct UnityEngine_AudioClip_o* SabotageSound;
     struct UnityEngine_AnimationClip_array* WeaponFires;
     struct PowerTools_SpriteAnim_o* WeaponsImage;
     struct UnityEngine_AudioClip_array* VentMoveSounds;
@@ -54,9 +54,11 @@ struct ShipStatus : InnerNet::InnerNetObject {
     std::int32_t WeaponFireIdx;
     float Timer;
     float EmergencyCooldown;
-    std::int32_t Type; // doesn't really help, no enum value for airship ¯\_(ツ)_/¯
-    bool OOHLKHLGEEC; // since 2021.3.5s
-    std::int32_t HBFNNGCEGNI; // since 2020.10.8i
+    std::int32_t Type;
+    bool _BeginCalled_k__BackingField;
+    float _HideCountdown_k__BackingField;
+    struct CosmeticsCache_o* _CosmeticsCache_k__BackingField;
+    std::int32_t numScans;
 
     struct StaticFields {
         ShipStatus* Instance;
@@ -73,6 +75,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
             case game_version::v2020_12_9s:  return Class<ShipStatus>::find("HLBNNHFCNAJ");
             case game_version::v2021_3_5s:   return Class<ShipStatus>::find("ShipStatus");
             case game_version::v2021_4_12s:  return Class<ShipStatus>::find("ShipStatus");
+            case game_version::v2022_3_29s:  return Class<ShipStatus>::find("ShipStatus");
         }
         return nullptr;
     }
@@ -84,7 +87,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     // No [marker], name shouldn't change
     void Begin();
 };
-CHECK_TYPE(ShipStatus, 0xE8);
+CHECK_TYPE(ShipStatus, 0xF4);
 
 template <>
 const char* get_method_name<&ShipStatus::Begin>() {
@@ -98,6 +101,7 @@ const char* get_method_name<&ShipStatus::Begin>() {
         case game_version::v2020_12_9s:  return "Begin";
         case game_version::v2021_3_5s:   return "Begin";
         case game_version::v2021_4_12s:  return "Begin";
+        case game_version::v2022_3_29s:  return "Begin";
     }
     return nullptr;
 }
