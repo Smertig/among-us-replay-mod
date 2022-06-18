@@ -38,7 +38,8 @@ This repository contains source code of Replay Mod for [Among Us](https://store.
 
 :warning: **You should run `injector.exe` on every game restart.**
 
-All the replays can be later found at `/Steam/steamapps/common/Among Us/replay` folder.
+All the replays can be later found for **Steam** at `/Steam/steamapps/common/Among Us/replay` and  
+for **Epic Games** at `/Epic Games/AmongUs/replay`
 
 ### Replaying game
 
