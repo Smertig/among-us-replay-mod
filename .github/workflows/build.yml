@@ -1,6 +1,7 @@
 name: Build On Push
 
-on:
+on: 
+  workflow_dispatch:
   push:
     branches:
       - '*'
