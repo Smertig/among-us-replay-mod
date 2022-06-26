@@ -25,7 +25,7 @@ This repository contains source code of Replay Mod for [Among Us](https://store.
 | v2021.3.5s      | 0.7.0         |
 | v2021.4.12s     | 0.7.1         |
 | **v2022.3.29s** | **≥0.8.0**    |
-| **v2020.4.19e** | **≥0.8.1**    |
+| **v2022.4.19e** | **≥0.8.1**    |
 
 ## Usage
 
