@@ -20,7 +20,7 @@ enum class game_version {
 namespace mod_info {
 
 constexpr std::string_view name    = "Replay Mod";
-constexpr std::string_view version = "0.8.1"; // do not forget about README!
+constexpr std::string_view version = "0.8.2"; // do not forget about README!
 
 game_version get_game_version();
 
