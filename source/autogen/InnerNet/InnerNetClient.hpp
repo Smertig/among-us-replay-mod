@@ -7,7 +7,9 @@ namespace InnerNet {
 struct ClientData;
 struct InnerNetObject;
 
+// il2cpp: struct InnerNet_InnerNetClient_Fields
 struct InnerNetClient : UnityEngine::MonoBehaviour {
+    // il2cpp: enum InnerNetClient.GameStates
     enum class GameStates : std::int32_t {
         NotJoined = 0,
         Joined = 1,

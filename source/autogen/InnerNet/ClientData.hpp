@@ -6,6 +6,7 @@ struct PlayerControl;
 
 namespace InnerNet {
 
+// il2cpp: struct InnerNet_ClientData_Fields
 struct ClientData : ::Object {
     std::int32_t Id;
     bool InScene;

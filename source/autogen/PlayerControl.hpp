@@ -7,6 +7,7 @@
 struct PlayerTask;
 struct CustomNetworkTransform;
 
+// il2cpp: struct PlayerControl_Fields
 struct PlayerControl : InnerNet::InnerNetObject {
     std::int32_t LastStartCounter;
     std::uint8_t PlayerId;

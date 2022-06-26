@@ -4,6 +4,7 @@
 
 struct PlayerControl;
 
+// il2cpp: struct RoleBehaviour_Fields
 struct RoleBehaviour : UnityEngine::MonoBehaviour {
     std::uint16_t Role;
     std::int32_t StringName;

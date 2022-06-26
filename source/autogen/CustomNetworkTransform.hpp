@@ -4,6 +4,7 @@
 #include <autogen/UnityEngine/Vector2.hpp>
 #include <autogen/UnityEngine/Rigidbody2D.hpp>
 
+// il2cpp: struct CustomNetworkTransform_Fields
 struct CustomNetworkTransform : InnerNet::InnerNetObject {
     struct FloatRange_o *XRange;
     struct FloatRange_o *YRange;
