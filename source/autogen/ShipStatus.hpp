@@ -50,7 +50,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     float Timer;
     float EmergencyCooldown;
     std::int32_t Type;
-    bool _BeginCalled_k__BackingField;
+    bool _ShouldCheckForGameEnd_k__BackingField;
     float _HideCountdown_k__BackingField;
     struct CosmeticsCache_o* _CosmeticsCache_k__BackingField;
     std::int32_t numScans;

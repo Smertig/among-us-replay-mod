@@ -28,17 +28,17 @@ struct GameData : InnerNet::InnerNetObject {
         System::String* SkinId;
         System::String* VisorId;
         System::String* NamePlateId;
-        System::String* _playerName;
         System::String* preCensorName;
         System::String* postCensorName;
     };
-    CHECK_TYPE(PlayerOutfit, 0x28);
+    CHECK_TYPE(PlayerOutfit, 0x24);
 
     // il2cpp: struct GameData_PlayerInfo_Fields
     struct PlayerInfo : ::Object {
         std::uint8_t PlayerId;
         System::String* FriendCode;
         System::String* Puid;
+        std::uint16_t RoleType;
         System::Collections::Generic::Dictionary<PlayerOutfitType, PlayerOutfit>* Outfits;
         std::uint32_t PlayerLevel;
         bool Disconnected;
@@ -51,7 +51,7 @@ struct GameData : InnerNet::InnerNetObject {
             return get_cached_method<&PlayerInfo::get_PlayerName>("get_PlayerName")(this);
         }
     };
-    CHECK_TYPE(PlayerInfo, 0x28);
+    CHECK_TYPE(PlayerInfo, 0x2C);
 
     System::Collections::Generic::List<PlayerInfo*>* AllPlayers;
     std::int32_t TotalTasks;
