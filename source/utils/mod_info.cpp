@@ -35,6 +35,8 @@ game_version get_game_version() {
             { game_version::v2020_12_9s,  "0.6.5" },
             { game_version::v2021_3_5s,   "0.7.0" },
             { game_version::v2021_4_12s,  "0.7.1" },
+            { game_version::v2022_3_29s,  "0.8.1" },
+            { game_version::v2022_4_19s,  "0.8.1" },
         };
 
         auto app_version = UnityEngine::Application::get_version();
