@@ -10,7 +10,6 @@
 #include "utils/periodic_printer.hpp"
 #include "utils/logger.hpp"
 
-#include <autogen/RpcCalls.hpp>
 #include <autogen/PlayerControl.hpp>
 #include <autogen/GameData.hpp>
 #include <autogen/CustomNetworkTransform.hpp>
