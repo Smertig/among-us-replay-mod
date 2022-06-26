@@ -15,6 +15,7 @@ struct AmongUsClient : InnerNet::InnerNetClient {
     struct System_Collections_Generic_List_IDisconnectHandler__o* DisconnectHandlers;
     struct System_Collections_Generic_List_IGameListHandler__o* GameListHandlers;
     std::int32_t CrossplayPrivilegeError;
+    std::int32_t MAX_CLIENT_WAIT_TIME;
 
     // il2cpp: struct AmongUsClient_StaticFields
     struct StaticFields {
@@ -29,4 +30,4 @@ struct AmongUsClient : InnerNet::InnerNetClient {
         return get_class()->statics()->Instance;
     }
 };
-CHECK_TYPE(AmongUsClient, 0xB0);
+CHECK_TYPE(AmongUsClient, 0xB4);

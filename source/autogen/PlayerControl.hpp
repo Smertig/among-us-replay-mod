@@ -15,11 +15,10 @@ struct PlayerControl : InnerNet::InnerNetObject {
     System::String* Puid;
     float MaxReportDistance;
     bool moveable;
-    struct System_Collections_Generic_List_PlayerBodySprite__o* BodySprites;
-    struct PlayerBodySprite_o* CurrentBodySprite;
-    struct PlayerBodySprite_o* NormalBodySprite;
+    struct NormalBodySpriteCosmeticsLayer_o* cosmetics;
     std::int32_t _CurrentOutfitType_k__BackingField;
     bool inVent;
+    bool inMovingPlat;
     bool protectedByGuardianThisRound;
     bool shapeshifting;
     struct GameData_PlayerInfo_o* _cachedData;
@@ -30,15 +29,11 @@ struct PlayerControl : InnerNet::InnerNetObject {
     struct KillAnimation_array* KillAnimations;
     float killTimer;
     std::int32_t RemainingEmergencies;
-    struct TMPro_TextMeshPro_o* nameText;
     struct LightSource_o* LightPrefab;
     struct LightSource_o* myLight;
     struct UnityEngine_Collider2D_o* Collider;
     struct PlayerPhysics_o* MyPhysics;
     CustomNetworkTransform* NetTransform;
-    struct PetBehaviour_o* CurrentPet;
-    struct HatParent_o* HatRenderer;
-    struct VisorLayer_o* VisorSlot;
     struct PowerTools_SpriteAnim_o* myAnim;
     struct PowerTools_SpriteAnim_o* horseAnim;
     struct UnityEngine_Collider2D_array* hitBuffer;
@@ -63,7 +58,7 @@ struct PlayerControl : InnerNet::InnerNetObject {
 
     void SetTasks(void*);
 };
-CHECK_TYPE(PlayerControl, 0xCC);
+CHECK_TYPE(PlayerControl, 0xB4);
 
 template <>
 const char* get_method_name<&PlayerControl::SetTasks>() {
