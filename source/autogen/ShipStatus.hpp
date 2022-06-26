@@ -4,6 +4,7 @@
 #include <autogen/UnityEngine/Vector2.hpp>
 #include <autogen/UnityEngine/Color.hpp>
 
+// il2cpp: struct ShipStatus_Fields
 struct ShipStatus : InnerNet::InnerNetObject {
     UnityEngine::Color CameraColor;
     float MaxLightRadius;
@@ -54,6 +55,7 @@ struct ShipStatus : InnerNet::InnerNetObject {
     struct CosmeticsCache_o* _CosmeticsCache_k__BackingField;
     std::int32_t numScans;
 
+    // il2cpp: struct ShipStatus_StaticFields
     struct StaticFields {
         ShipStatus* Instance;
     };

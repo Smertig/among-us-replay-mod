@@ -9,7 +9,9 @@
 struct PlayerControl;
 struct RoleBehaviour;
 
+// il2cpp: struct GameData_Fields
 struct GameData : InnerNet::InnerNetObject {
+    // il2cpp: struct GameData_TaskInfo_Fields
     struct TaskInfo : ::Object {
         std::uint32_t Id;
         std::uint8_t TypeId;
@@ -17,6 +19,7 @@ struct GameData : InnerNet::InnerNetObject {
     };
     CHECK_TYPE(TaskInfo, 0x8);
 
+    // il2cpp: struct GameData_PlayerOutfit_Fields
     struct PlayerOutfit : ::Object {
         bool dontCensorName;
         std::int32_t ColorId;
@@ -31,6 +34,7 @@ struct GameData : InnerNet::InnerNetObject {
     };
     CHECK_TYPE(PlayerOutfit, 0x28);
 
+    // il2cpp: struct GameData_PlayerInfo_Fields
     struct PlayerInfo : ::Object {
         std::uint8_t PlayerId;
         System::String* FriendCode;
@@ -54,6 +58,7 @@ struct GameData : InnerNet::InnerNetObject {
     std::int32_t CompletedTasks;
     struct RoleBehaviour_o* DefaultRole;
 
+    // il2cpp: struct GameData_StaticFields
     struct StaticFields {
         GameData* instance;
     };

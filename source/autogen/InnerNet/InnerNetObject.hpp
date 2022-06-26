@@ -4,6 +4,7 @@
 
 namespace InnerNet {
 
+// il2cpp: struct InnerNet_InnerNetObject_Fields
 struct InnerNetObject : UnityEngine::MonoBehaviour {
     std::uint32_t SpawnId;
     std::uint32_t NetId;

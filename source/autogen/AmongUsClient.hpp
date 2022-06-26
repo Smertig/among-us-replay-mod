@@ -2,6 +2,7 @@
 
 #include <autogen/InnerNet/InnerNetClient.hpp>
 
+// il2cpp: struct AmongUsClient_Fields
 struct AmongUsClient : InnerNet::InnerNetClient {
     struct System_String_o* OnlineScene;
     struct System_String_o* MainMenuScene;
@@ -15,6 +16,7 @@ struct AmongUsClient : InnerNet::InnerNetClient {
     struct System_Collections_Generic_List_IGameListHandler__o* GameListHandlers;
     std::int32_t CrossplayPrivilegeError;
 
+    // il2cpp: struct AmongUsClient_StaticFields
     struct StaticFields {
         AmongUsClient* Instance;
     };
