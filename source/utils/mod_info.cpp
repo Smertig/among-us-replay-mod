@@ -24,6 +24,7 @@ game_version get_game_version() {
             { "2022.4.19",  game_version::v2022_4_19s  },
             { "2022.6.21",  game_version::v2022_6_21s  },
             { "2022.6.22",  game_version::v2022_6_22s  },
+            { "2022.7.12",  game_version::v2022_7_12s  }
         };
 
         static const std::map<game_version, std::string_view /* last supported mod version */> deprecated_versions {
