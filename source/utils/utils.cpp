@@ -24,6 +24,15 @@ std::string utils::get_date_string(std::chrono::system_clock::time_point t) {
     return buffer;
 }
 
-void utils::msgbox_warning(const std::string& text) {
-    MessageBoxA(nullptr, text.c_str(), fmt::format("{} v{}", mod_info::name, mod_info::version).c_str(), MB_ICONEXCLAMATION);
+static std::string get_msgbox_caption() {
+    return fmt::format("{} v{}", mod_info::mod_name, mod_info::mod_version);
+}
+
+void utils::msgbox_error(const std::string& text) {
+    MessageBoxA(nullptr, text.c_str(), get_msgbox_caption().c_str(), MB_ICONERROR);
+}
+
+bool utils::msgbox_warning_yesno(const std::string& text) {
+    const auto result = MessageBoxA(nullptr, text.c_str(), get_msgbox_caption().c_str(), MB_ICONEXCLAMATION | MB_YESNO);
+    return result == IDYES;
 }

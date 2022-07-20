@@ -167,7 +167,7 @@ private:
         write('A', 'U', 'R', 'P');
         write(DUMP_BINARY_VERSION);
         write(std::time(nullptr));
-        write(mod_info::version);
+        write(mod_info::mod_version);
         write(UnityEngine::Application::get_version());
         write(get_map_id(ship));
         write(static_cast<std::uint32_t>(game->AllPlayers->size()));
@@ -340,25 +340,17 @@ void enable_sniffer() {
     spdlog::set_level(spdlog::level::off);
 
     try {
-        mod_info::get_game_version();
+        if (!mod_info::validate_game_version()) {
+            return;
+        }
+
+        init_logger();
+        replay_tracer::init();
     }
     catch (std::exception& e) {
-        const auto msg = fmt::format(
-            "{} v{} doesn't support Among Us v{}.\n"
-            "\n"
-            "Reason: {}.\n"
-            "\n"
-            "All mod versions are at https://github.com/Smertig/among-us-replay-mod/releases",
-            mod_info::name,
-            mod_info::version,
-            UnityEngine::Application::get_version(),
+        utils::msgbox_error(fmt::format(
+            "Unhandled error during sniffer initialization: {}",
             e.what()
-        );
-
-        utils::msgbox_warning(msg);
-        return;
+        ));
     }
-
-    init_logger();
-    replay_tracer::init();
 }

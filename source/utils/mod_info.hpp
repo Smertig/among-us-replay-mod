@@ -2,26 +2,26 @@
 
 #include <string_view>
 
-enum class game_version {
-    v2020_6_9s,
-    v2020_9_22s,
-    v2020_10_8i,
-    v2020_10_22s,
-    v2020_11_4s,
-    v2020_11_17s,
-    v2020_12_9s,
-    v2021_3_5s,
-    v2021_4_12s,
-    v2022_3_29s,
-    v2022_4_19s,
-    v2022_6_21s
+struct game_version {
+    std::uint16_t year;
+    std::uint8_t month;
+    std::uint8_t day;
+
+    friend auto operator<=>(const game_version&, const game_version&) = default;
+
+    std::string to_string() const;
 };
 
 namespace mod_info {
 
-constexpr std::string_view name    = "Replay Mod";
-constexpr std::string_view version = "0.8.2"; // do not forget about README!
+constexpr std::string_view mod_name    = "Replay Mod";
+constexpr std::string_view mod_version = "0.8.2"; // do not forget about README!
+
+constexpr auto min_supported_game_version = game_version{ .year = 2022, .month = 6, .day = 21 };
+constexpr auto max_supported_game_version = game_version{ .year = 2022, .month = 6, .day = 21 };
 
 game_version get_game_version();
+
+bool validate_game_version();
 
 } // namespace mod_info

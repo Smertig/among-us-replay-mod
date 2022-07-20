@@ -1,7 +1,6 @@
 #include "logger.hpp"
 #include "utils.hpp"
 #include "mod_info.hpp"
-#include "enums.hpp"
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -25,6 +24,6 @@ void init_logger() {
     spdlog::set_default_logger(logger);
 
     spdlog::info("Start logging");
-    spdlog::info("Mod version: {}", mod_info::version);
-    spdlog::info("Game version: {} ({})", UnityEngine::Application::get_version(), mod_info::get_game_version());
+    spdlog::info("Mod version: {}", mod_info::mod_version);
+    spdlog::info("Game version: {} ({})", UnityEngine::Application::get_version(), mod_info::get_game_version().to_string());
 }
