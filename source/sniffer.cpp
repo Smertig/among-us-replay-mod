@@ -24,6 +24,7 @@
 #include <filesystem>
 #include <map>
 #include <ranges>
+#include <set>
 
 template <>
 struct fmt::formatter<UnityEngine::Vector2, char> : fmt::formatter<float> {
@@ -116,11 +117,14 @@ private:
 
     void stop() {
         m_stream.close();
+        m_start_time = {};
+        m_players.clear();
+        m_ignored_players.clear();
 
         spdlog::info("Stop recording.. ({})", is_started());
     }
 
-    bool is_started() {
+    bool is_started() const {
         return m_stream.is_open();
     }
 
@@ -170,8 +174,20 @@ private:
         write(mod_info::mod_version);
         write(UnityEngine::Application::get_version());
         write(get_map_id(ship));
-        write(static_cast<std::uint32_t>(game->AllPlayers->size()));
+
+        const auto player_count = std::ranges::count_if(
+            *game->AllPlayers,
+            [](const auto player) { return !player->Disconnected; }
+        );
+        write(static_cast<std::uint32_t>(player_count));
+
         for (const auto player : *game->AllPlayers) {
+            if (player->Disconnected) {
+                spdlog::warn("Player {} disconnected before game starts", static_cast<int>(player->PlayerId));
+                m_ignored_players.insert(player->PlayerId);
+                continue;
+            }
+
             const auto client_data = AmongUsClient::Instance()->GetClientFromCharacter(player->_object);
             assert(client_data);
 
@@ -186,10 +202,11 @@ private:
         }
     }
 
-    static bool is_player_valid(const GameData::PlayerInfo* player) {
+    bool is_player_valid(const GameData::PlayerInfo* player) const {
         return !is_null(player) &&
                !is_null(player->_object) &&
-               !is_null(player->_object->NetTransform);
+               !is_null(player->_object->NetTransform) &&
+               !m_ignored_players.contains(player->PlayerId);
     }
 
     void on_frame(const GameData* game) {
@@ -334,6 +351,7 @@ private:
     std::fstream m_stream;
     std::chrono::system_clock::time_point m_start_time;
     std::map<std::uint8_t, player_state> m_players;
+    std::set<std::uint8_t> m_ignored_players;
 };
 
 void enable_sniffer() {
