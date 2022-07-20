@@ -18,7 +18,7 @@ constexpr std::string_view mod_name    = "Replay Mod";
 constexpr std::string_view mod_version = "0.8.2"; // do not forget about README!
 
 constexpr auto min_supported_game_version = game_version{ .year = 2022, .month = 6, .day = 21 };
-constexpr auto max_supported_game_version = game_version{ .year = 2022, .month = 6, .day = 21 };
+constexpr auto max_supported_game_version = game_version{ .year = 2022, .month = 7, .day = 12 };
 
 game_version get_game_version();
 
